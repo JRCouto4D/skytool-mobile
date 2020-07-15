@@ -2,7 +2,6 @@ import React from 'react';
 import { View, Text } from 'react-native';
 
 import Backgrond from '../../components/Background';
-import Input from '../../components/Input';
 
 import logo from '../../../assets/LOGO.png';
 
