@@ -8,6 +8,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import Dashboard from './pages/Dashboard';
+import Category from './pages/Category';
 
 export default function Routes() {
   const Stack = createStackNavigator();
@@ -40,6 +41,17 @@ export default function Routes() {
             tabBarLabel: 'Inicio',
             tabBarIcon: ({ color }) => (
               <MaterialIcons name="home" size={30} color={color} />
+            )
+          }}
+        />
+
+        <Tabs.Screen
+          name="Category"
+          component={Category}
+          options={{
+            tabBarLabel: 'Categorias',
+            tabBarIcon: ({ color }) => (
+              <MaterialIcons name="list" size={30} color={color} />
             )
           }}
         />
