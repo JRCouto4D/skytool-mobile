@@ -10,6 +10,7 @@ import SignUp from './pages/SignUp';
 import Dashboard from './pages/Dashboard';
 import Category from './pages/Category';
 import Favorites from './pages/Favorites';
+import Profile from './pages/Profile';
 
 export default function Routes() {
   const Stack = createStackNavigator();
@@ -64,6 +65,17 @@ export default function Routes() {
             tabBarLabel: 'Favoritos',
             tabBarIcon: ({ color }) => (
               <MaterialIcons name="favorite" size={30} color={color} />
+            )
+          }}
+        />
+
+        <Tabs.Screen
+          name="Profile"
+          component={Profile}
+          options={{
+            tabBarLabel: 'Minha conta',
+            tabBarIcon: ({ color }) => (
+              <MaterialIcons name="person" size={30} color={color} />
             )
           }}
         />
