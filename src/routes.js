@@ -9,6 +9,7 @@ import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import Dashboard from './pages/Dashboard';
 import Category from './pages/Category';
+import Favorites from './pages/Favorites';
 
 export default function Routes() {
   const Stack = createStackNavigator();
@@ -52,6 +53,17 @@ export default function Routes() {
             tabBarLabel: 'Categorias',
             tabBarIcon: ({ color }) => (
               <MaterialIcons name="list" size={30} color={color} />
+            )
+          }}
+        />
+
+        <Tabs.Screen
+          name="Favorites"
+          component={Favorites}
+          options={{
+            tabBarLabel: 'Favoritos',
+            tabBarIcon: ({ color }) => (
+              <MaterialIcons name="favorite" size={30} color={color} />
             )
           }}
         />
