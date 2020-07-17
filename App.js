@@ -15,7 +15,7 @@ export default function App() {
       <Provider store={store}>
         <PersistGate persistor={persistor}>
           <Routes />
-          <StatusBar style="auto" />
+          <StatusBar style="light" />
         </PersistGate>
       </Provider>
     </>

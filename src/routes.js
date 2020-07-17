@@ -27,8 +27,6 @@ export default function Routes() {
           activeTintColor: '#fff',
           tabStyle: {
             backgroundColor: '#9F0D8B',
-            height: 60,
-            top: -11,
             padding: 5,
           },
           labelStyle: {
@@ -42,7 +40,7 @@ export default function Routes() {
           options={{
             tabBarLabel: 'Inicio',
             tabBarIcon: ({ color }) => (
-              <MaterialIcons name="home" size={30} color={color} />
+              <MaterialIcons name="home" size={25} color={color} />
             )
           }}
         />
@@ -53,7 +51,7 @@ export default function Routes() {
           options={{
             tabBarLabel: 'Categorias',
             tabBarIcon: ({ color }) => (
-              <MaterialIcons name="list" size={30} color={color} />
+              <MaterialIcons name="list" size={25} color={color} />
             )
           }}
         />
@@ -64,7 +62,7 @@ export default function Routes() {
           options={{
             tabBarLabel: 'Favoritos',
             tabBarIcon: ({ color }) => (
-              <MaterialIcons name="favorite" size={30} color={color} />
+              <MaterialIcons name="favorite" size={25} color={color} />
             )
           }}
         />
@@ -75,7 +73,7 @@ export default function Routes() {
           options={{
             tabBarLabel: 'Minha conta',
             tabBarIcon: ({ color }) => (
-              <MaterialIcons name="person" size={30} color={color} />
+              <MaterialIcons name="person" size={25} color={color} />
             )
           }}
         />
