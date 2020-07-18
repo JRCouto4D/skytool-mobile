@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Text } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 
 import logo from '../../../assets/LOGO.png';
 import Home from '../../components/Home';
+import Search from '../../components/Search';
 
 import {
   Container,
@@ -21,6 +22,8 @@ import {
 } from './styles';
 
 const Dashboard = () => {
+  const [search, setSearch] = useState('');
+
   return (
     <Container>
       <Block>
@@ -47,7 +50,11 @@ const Dashboard = () => {
       </Block>
       
       <Content>
-        <Home />
+        {search ? (
+          <Home />
+        ) : (
+          <Search />
+        )}
       </Content>
     </Container>
   );
