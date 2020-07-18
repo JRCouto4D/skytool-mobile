@@ -1,6 +1,7 @@
 import styled from 'styled-components/native';
+import { RectButton } from 'react-native-gesture-handler';
 
-export const Container = styled.View`
+export const Container = styled(RectButton)`
   background: #FFF;
   align-self: stretch;
   margin-right: 10px;
@@ -43,7 +44,9 @@ export const Evaluation = styled.View`
   margin-top: 5px;
 `;
 
-export const Note = styled.FlatList`
+export const Note = styled.FlatList.attrs({
+  showsVerticalScrollIndicator: false,
+})`
   flex-direction: row;
 `;
 

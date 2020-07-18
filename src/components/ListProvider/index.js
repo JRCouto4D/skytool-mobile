@@ -1,12 +1,12 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet } from 'react-native';
+import { RectButton } from 'react-native-gesture-handler';
 
 import logo from '../../../assets/LOGO_3.jpg';
 
 import { MaterialIcons } from '@expo/vector-icons';
 
 import {
-  Container,
   BoxLeft,
   Image,
   Info,
@@ -44,7 +44,7 @@ const ListProvider = () => {
   });
 
   return (
-    <View
+    <RectButton
       style={styles.containerStyle}
     >
       <BoxLeft>
@@ -65,7 +65,7 @@ const ListProvider = () => {
       </BoxLeft>
 
       <Status open={false}>FECHADO</Status>
-    </View>
+    </RectButton>
   );
 }
 
