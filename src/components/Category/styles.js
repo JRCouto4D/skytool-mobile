@@ -17,10 +17,14 @@ export const BoxIcon = styled.TouchableOpacity`
   align-items: center;
 `;
 
-export const Image = styled.Image``;
+export const Image = styled.Image`
+  width: 50px;
+  height: 50px;
+`;
 
 export const TextIcon = styled.Text`
-  font-size: 10px;
+  font-size: 9px;
+  font-weight: bold;
   color: #999999;
 
   margin-top: 10px;
