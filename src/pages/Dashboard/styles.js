@@ -69,6 +69,9 @@ export const SearchInput = styled.TextInput`
   
 `;
 
-export const Content = styled.View``;
+export const Content = styled.View`
+  width: 100%;
+  flex: 1;
+`;
 
 
