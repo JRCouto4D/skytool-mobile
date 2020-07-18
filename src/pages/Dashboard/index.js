@@ -22,7 +22,7 @@ import {
 } from './styles';
 
 const Dashboard = () => {
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState(null);
 
   return (
     <Container>
@@ -50,7 +50,7 @@ const Dashboard = () => {
       </Block>
       
       <Content>
-        {search ? (
+        {search === null ? (
           <Home />
         ) : (
           <Search />
