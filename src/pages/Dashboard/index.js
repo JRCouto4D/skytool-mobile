@@ -3,6 +3,7 @@ import { Text } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 
 import logo from '../../../assets/LOGO.png';
+import Home from '../../components/Home';
 
 import {
   Container,
@@ -46,7 +47,7 @@ const Dashboard = () => {
       </Block>
       
       <Content>
-        
+        <Home />
       </Content>
     </Container>
   );
