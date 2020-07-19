@@ -1,8 +1,11 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { Text } from 'react-native';
 
 import Background from '../../components/Background';
 import Address from '../../components/Address';
+
+import { signOut } from '../../store/module/auth/actions';
 
 import foto from '../../../assets/foto.jpg';
 
@@ -32,6 +35,11 @@ import {
 
 const Profile = () => {
   const address = [1, 2];
+  const dispatch = useDispatch();
+
+  function handleLogout() {
+    dispatch(signOut());
+  }
 
   return (
     <Background>
@@ -110,6 +118,7 @@ const Profile = () => {
           text="Sair"
           subText="Acessar com outra conta"
           icon="exit-to-app"
+          onPress={handleLogout}
         />
       </Content>
       </Container>
