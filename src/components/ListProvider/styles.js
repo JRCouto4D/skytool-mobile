@@ -19,19 +19,20 @@ export const BoxLeft = styled.View`
 `;
 
 export const Image = styled.Image`
-  width: 100px;
-  height: 100px;
-  border-radius: 50px;
+  width: 85px;
+  height: 85px;
+  border-radius: 42.5px;
 `;
 
 export const Info = styled.View`
   margin-left: 10px;
+  width: 65%;
 `;
 
 export const Provider = styled.Text`
   color: #333;
   font-weight: bold;
-  font-size: 18px;
+  font-size: 16px;
 `;
 
 export const Sector = styled.Text`
