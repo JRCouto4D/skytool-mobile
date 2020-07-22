@@ -55,7 +55,7 @@ const ListProvider = () => {
           <Evaluation>
             <Note
               data={note}
-              key={(item) => String(item)}
+              keyExtractor={(item) => String(item)}
               renderItem={({ item }) => (
                 <MaterialIcons name="star" size={15} color="#F1993B" />
               )}

@@ -51,8 +51,11 @@ export const Note = styled.FlatList.attrs({
 `;
 
 export const Status = styled.Text`
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+
   color: ${(props) => props.open ? '#00CC33' : '#f64c75'};
-  font-size: 12px;
-  margin-top: 80px;
   font-weight: bold;
+  font-size: 10px;
 `;
