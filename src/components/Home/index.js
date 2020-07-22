@@ -16,7 +16,7 @@ const Home = () => {
 
       <List
         data={data}
-        key={(item) => String(item)}
+        keyExtractor={(item) => String(item)}
         renderItem={({ item }) => (
           <ListProvider />
         )}

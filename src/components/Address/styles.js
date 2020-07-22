@@ -2,11 +2,12 @@ import styled from 'styled-components/native';
 
 export const Container = styled.View`
   flex: 1;
+  max-width: 50%;
 `;
 export const Title = styled.Text`
   color: #eee;
   font-weight: bold;
-  font-size: 14px;
+  font-size: 12px;
 `; 
 export const Block = styled.View`
   margin-top: 10px;
@@ -17,7 +18,7 @@ export const LabelBlock = styled.View`
   margin-top: 3px;
 `; 
 export const Label = styled.Text`
-  font-size: 12px;
+  font-size: 10px;
   color: #ddd;
   font-weight: bold;
 `; 

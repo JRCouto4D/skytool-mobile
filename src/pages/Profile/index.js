@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Text } from 'react-native';
 
 import Background from '../../components/Background';
@@ -34,7 +34,7 @@ import {
 } from './styles';
 
 const Profile = () => {
-  const address = [1, 2];
+  const { profile } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   function handleLogout() {
@@ -52,21 +52,24 @@ const Profile = () => {
               <BoxData>
                 <BoxName>
                   <Label>NAME:</Label>
-                  <Value>Jefferson Rocha Couto</Value>
+                  <Value>{profile.name}</Value>
                 </BoxName>
 
                 <BoxEmail>
                   <Label>EMAIL:</Label>
-                  <Value>jeffynho32@gmail.com</Value>
+                  <Value>{profile.email}</Value>
                 </BoxEmail>
               </BoxData>
 
               <BoxContact>
                 <Label>TELEFONE:</Label>
-                <BoxPhone>
-                  <Phone>(77) 98120-2019</Phone>
-                  <Phone>(77) 98131-2021</Phone>
-                </BoxPhone>
+                <BoxPhone
+                  data={profile.phones}
+                  keyExtractor={(item) => String(item.id)}
+                  renderItem={({ item }) => (
+                    <Phone>{item.number}</Phone>
+                  )}
+                />
               </BoxContact>
             </BoxUser>
 
@@ -74,10 +77,10 @@ const Profile = () => {
 
             <BoxAddress>
               <ListAddress
-                data={address}
-                key={(item) => String(item)}
+                data={profile.address}
+                keyExtractor={(item) => String(item.id)}
                 renderItem={({ item }) => (
-                  <Address />
+                  <Address address={item} />
                 )}
               />
             </BoxAddress>

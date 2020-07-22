@@ -10,36 +10,36 @@ import {
   Value, 
 } from './styles';
 
-const Address = () => {
+const Address = ({ address }) => {
   return (
     <Container>
       <Title>ENDEREÇO 1:</Title>
       <Block>
         <LabelBlock>
           <Label>RUA:</Label>
-          <Value>Joel Santos - 41</Value>
+          <Value>{`${address.street} - ${address.number}`}</Value>
         </LabelBlock>
 
         <LabelBlock>
           <Label>BAIRRO:</Label>
-          <Value>Otávio Camões</Value>
+          <Value>{address.neighborhood}</Value>
         </LabelBlock>
       </Block>
 
       <Block>
         <LabelBlock>
           <Label>CIDADE:</Label>
-          <Value>Itapetinga</Value>
+          <Value>{address.city}</Value>
         </LabelBlock>
 
         <LabelBlock>
           <Label>ESTADO:</Label>
-          <Value>Bahia</Value>
+          <Value>{address.state}</Value>
         </LabelBlock>
 
         <LabelBlock>
           <Label>CEP:</Label>
-          <Value>45700-000</Value>
+          <Value>{address.zip_code}</Value>
         </LabelBlock>
       </Block>
     </Container>

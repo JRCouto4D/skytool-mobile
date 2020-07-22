@@ -6,9 +6,7 @@ export const Container = styled.View`
   margin-top: 50px;
 `;
 
-export const Content = styled.ScrollView`
-  flex: 1;
-`;
+export const Content = styled.ScrollView``;
 export const Title = styled.Text`
   font-size: 20px;
   font-weight: bold;
@@ -50,23 +48,25 @@ export const BoxName = styled.View`
   margin-bottom: 15px;
 `;
 export const Label = styled.Text`
-  font-size: 14px;
+  font-size: 10px;
   color: #eee;
   font-weight: bold;
 `;
 export const Value = styled.Text`
   color: #ddd;
-  font-size: 12px;
+  font-size: 10px;
   margin-top: 4px;
 `;
 export const BoxEmail = styled.View``;
 export const BoxContact = styled.View``;
-export const BoxPhone = styled.View`
+export const BoxPhone = styled.FlatList.attrs({
+  showsVerticalScrollIndicator: false,
+})`
   margin-top: 10px;
   flex: 1;
 `;
 export const Phone = styled.Text`
-  font-size: 12px;
+  font-size: 10px;
   color: #ddd;
   margin-top: 5px;
 `;
