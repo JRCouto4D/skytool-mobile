@@ -10,8 +10,6 @@ const Home = () => {
 
   return (
     <Container>
-      <Category />
-
       <Label>MAIS POPULARES:</Label>
 
       <List
