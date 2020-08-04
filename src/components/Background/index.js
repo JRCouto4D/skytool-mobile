@@ -1,5 +1,5 @@
 import { LinearGradient } from 'expo-linear-gradient';
-import styled from 'styled-components/native';  
+import styled from 'styled-components/native';
 
 export default styled(LinearGradient).attrs({
   colors: ['#9F0D8B', '#4A0155'],

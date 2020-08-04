@@ -2,8 +2,6 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
 
-import logo from '../../../assets/LOGO_3.jpg';
-
 import { MaterialIcons } from '@expo/vector-icons';
 
 import {
@@ -35,27 +33,28 @@ const ListProvider = ({ provider, category, navigation }) => {
       paddingTop: 5,
       paddingBottom: 5,
       paddingLeft: 8,
-      paddingRight:8,
+      paddingRight: 8,
       borderRadius: 4,
 
       flexDirection: 'row',
       justifyContent: 'space-between',
-    }
+    },
   });
 
   return (
     <RectButton
       style={styles.containerStyle}
-      onPress={() => navigation.navigate('Menu', { provider })}
-    >
+      onPress={() => navigation.navigate('Menu', { provider })}>
       <BoxLeft>
         <Image
-          source={{ uri: provider ? provider.avatar.url : 'https://ui-avatars.com/api/?color=A28FD0&background=F4EFFC&bold=true&format=png&size=140&rounded=true&name=SKYTOOL'}}
+          source={{
+            uri: provider
+              ? provider.avatar.url
+              : 'https://ui-avatars.com/api/?color=A28FD0&background=F4EFFC&bold=true&format=png&size=140&rounded=true&name=SKYTOOL',
+          }}
         />
         <Info>
-          <Provider>
-            {provider ? provider.name : ''}
-          </Provider>
+          <Provider>{provider ? provider.name : ''}</Provider>
           <Sector>{category}</Sector>
           <Evaluation>
             <Note
@@ -69,11 +68,11 @@ const ListProvider = ({ provider, category, navigation }) => {
         </Info>
       </BoxLeft>
 
-      <Status open={provider ? provider.open : false }>
+      <Status open={provider ? provider.open : false}>
         {provider ? (provider.open ? 'ABERTO' : 'FECHADO') : 'FECHADO'}
       </Status>
     </RectButton>
   );
-}
+};
 
 export default ListProvider;

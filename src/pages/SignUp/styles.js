@@ -24,7 +24,7 @@ export const FormInput = styled(Input)`
 export const SubmitButton = styled.TouchableOpacity`
   width: 100%;
   height: 46px;
-  background: #0099FF;
+  background: #0099ff;
   border-radius: 4px;
 
   justify-content: center;
@@ -44,4 +44,3 @@ export const TextLink = styled.Text`
 
   margin-top: 25px;
 `;
-

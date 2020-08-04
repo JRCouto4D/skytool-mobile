@@ -9,6 +9,6 @@ const Favorites = () => {
       <Text>Favorites</Text>
     </Container>
   );
-}
+};
 
 export default Favorites;

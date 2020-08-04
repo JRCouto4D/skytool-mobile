@@ -1,3 +1,4 @@
+/* eslint-disable no-fallthrough */
 import producer from 'immer';
 
 const INITIAL_STATE = {

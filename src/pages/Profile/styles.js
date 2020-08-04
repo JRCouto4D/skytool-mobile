@@ -23,7 +23,7 @@ export const Block = styled.View`
 `;
 export const BoxAvatar = styled.View`
   position: absolute;
-  background: #9F0D8B;
+  background: #9f0d8b;
   width: 120px;
   height: 120px;
   border-radius: 60px;
@@ -88,7 +88,7 @@ export const BoxButton = styled.View`
 `;
 
 export const Button = styled(BT)`
-  background: #0099FF;
+  background: #0099ff;
   margin-bottom: 5px;
 `;
 

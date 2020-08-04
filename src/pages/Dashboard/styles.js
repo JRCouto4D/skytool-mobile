@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import { Platform } from 'react-native';
 
 export const Container = styled.KeyboardAvoidingView.attrs({
   enabled: Platform.OS === 'ios',
@@ -12,7 +13,7 @@ export const Block = styled.View`
   width: 100%;
   height: 200px;
 
-  background: #9F0D8B;
+  background: #9f0d8b;
 
   padding: 0 15px;
 `;
@@ -53,7 +54,6 @@ export const BlockSearch = styled.View`
 
   padding: 0 10px;
   margin-top: 20px;
-
 `;
 
 export const Divider = styled.View`
@@ -61,17 +61,13 @@ export const Divider = styled.View`
   width: 2px;
   background: #ddd;
   margin: 0 10px;
-
 `;
 export const SearchInput = styled.TextInput`
   align-self: stretch;
   width: 85%;
-  
 `;
 
 export const Content = styled.View`
   width: 100%;
   flex: 1;
 `;
-
-

@@ -1,6 +1,5 @@
 import React from 'react';
 
-import Category from '../Category';
 import ListProvider from '../ListProvider';
 
 import { Container, Label, List } from './styles';
@@ -15,12 +14,10 @@ const Home = () => {
       <List
         data={data}
         keyExtractor={(item) => String(item)}
-        renderItem={({ item }) => (
-          <ListProvider />
-        )}
+        renderItem={() => <ListProvider />}
       />
     </Container>
   );
-}
+};
 
 export default Home;

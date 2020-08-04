@@ -5,7 +5,7 @@ module.exports = {
   extends: [
     'airbnb-base',
     'prettier',
-    'prettier/react',
+    'plugin:react/recommended',
     'plugin:react/recommended',
   ],
   globals: {
@@ -23,7 +23,12 @@ module.exports = {
   },
   plugins: ['react', 'prettier'],
   rules: {
-    'prettier/prettier': 'error',
+    'prettier/prettier': [
+      'error',
+      {
+        endOfLine: 'auto',
+      },
+    ],
     'react/jsx-filename-extension': [
       'warn',
       {
@@ -41,5 +46,7 @@ module.exports = {
     'no-console': ['error', { allow: ['tron'] }],
     'import/extensions': 'off',
     'import/no-unresolved': 'off',
+    'react/jsx-uses-react': 'error',
+    'react/jsx-uses-vars': 'error',
   },
 };

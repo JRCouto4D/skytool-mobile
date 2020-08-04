@@ -15,12 +15,12 @@ export const Label = styled.Text`
 `;
 
 export const BoxList = styled.View`
-flex-direction: row;
+  flex-direction: row;
 `;
 
 export const BoxIcon = styled.TouchableOpacity`
   flex: 1;
-  background: #FFF;
+  background: #fff;
   margin: 2px;
   padding: 20px;
 

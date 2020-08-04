@@ -27,37 +27,31 @@ const Dashboard = () => {
   return (
     <Container>
       <Block>
-      <Header>
-        <High>
-          <Logo source={logo} />
-          <BlockLabel>
-            <Salutation>Olá, Jefferson Couto</Salutation>
-            <Label>Bem-vindo!</Label>
-          </BlockLabel>
-        </High>
-      </Header>
+        <Header>
+          <High>
+            <Logo source={logo} />
+            <BlockLabel>
+              <Salutation>Olá, Jefferson Couto</Salutation>
+              <Label>Bem-vindo!</Label>
+            </BlockLabel>
+          </High>
+        </Header>
 
-      <BlockSearch>
-        <MaterialIcons name="search" size={32} color="#ccc" />
-        <Divider />
-        <SearchInput
-          placeholder="O que você está procurando"
-          autoCapitalize="none"
-          returnKeyType="send"
-          onSubmitEditing={() => {}}
-        />
-      </BlockSearch>
+        <BlockSearch>
+          <MaterialIcons name="search" size={32} color="#ccc" />
+          <Divider />
+          <SearchInput
+            placeholder="O que você está procurando"
+            autoCapitalize="none"
+            returnKeyType="send"
+            onSubmitEditing={() => {}}
+          />
+        </BlockSearch>
       </Block>
-      
-      <Content>
-        {search === null ? (
-          <Home />
-        ) : (
-          <Search />
-        )}
-      </Content>
+
+      <Content>{search === null ? <Home /> : <Search />}</Content>
     </Container>
   );
-}
+};
 
 export default Dashboard;

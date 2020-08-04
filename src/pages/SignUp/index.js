@@ -4,15 +4,15 @@ import Backgrond from '../../components/Background';
 
 import logo from '../../../assets/LOGO.png';
 
-import { 
+import {
   Container,
-  Logo, 
-  InputBlock, 
+  Logo,
+  InputBlock,
   FormInput,
   SubmitButton,
   TextButton,
   LinkSignUp,
-  TextLink, 
+  TextLink,
 } from './styles';
 
 const SignUp = ({ navigation }) => {
@@ -20,7 +20,7 @@ const SignUp = ({ navigation }) => {
 
   return (
     <Backgrond>
-      <Container> 
+      <Container>
         <Logo source={logo} />
         <InputBlock>
           <FormInput
@@ -64,6 +64,6 @@ const SignUp = ({ navigation }) => {
       </Container>
     </Backgrond>
   );
-}
+};
 
 export default SignUp;
