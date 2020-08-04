@@ -38,7 +38,7 @@ export const Provider = styled.Text`
 export const Sector = styled.Text`
   color: #999;
   font-size: 12px;
-  margin-top: -3px;
+  margin-top: -1px;
 `;
 
 export const Evaluation = styled.View`
