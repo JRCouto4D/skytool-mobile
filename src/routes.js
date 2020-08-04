@@ -1,4 +1,5 @@
 import React from 'react';
+import { TouchableOpacity } from 'react-native';
 import { useSelector } from 'react-redux';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -8,15 +9,71 @@ import { MaterialIcons } from '@expo/vector-icons';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import Dashboard from './pages/Dashboard';
-import Category from './pages/Category';
+import ListCategory from './pages/Category';
+import ListProvider from './pages/Category/List';
 import Favorites from './pages/Favorites';
 import Profile from './pages/Profile';
+import Menu from './pages/Menu';
 
 export default function Routes() {
   const Stack = createStackNavigator();
   const Tabs = createBottomTabNavigator();
 
   const { signed } = useSelector((state) => state.auth);
+
+  function Category() {
+    return (
+      <Stack.Navigator
+        screenOptions={{
+          headerTintColor: '#FFF',
+          headerBackTitleVisible: false,
+          headerStyle: {
+            backgroundColor: '#9F0D8B',
+          },
+          headerLeftContainerStyle: {
+            marginLeft: 10,
+          },
+        }}
+      >
+        <Stack.Screen
+          name="LisCategory"
+          component={ListCategory}
+          options={{
+            headerShown: false,
+            gestureEnabled: false,
+            animationEnabled: false,
+          }}
+        />
+        <Stack.Screen
+          name="LisProvider"
+          component={ListProvider}
+          options={({ route, navigation }) => ({
+            headerTitleAlign: 'center',
+            title: route.params.category.name,
+            headerLeft: () => (
+              <TouchableOpacity onPress={() => navigation.goBack()}>
+                <MaterialIcons name="chevron-left" size={30} color="#fff" />
+              </TouchableOpacity>
+            ),
+          })}
+        />
+
+        <Stack.Screen
+          name="Menu"
+          component={Menu}
+          options={({ route, navigation }) => ({
+            headerTitleAlign: 'center',
+            title: route.params.provider.name,
+            headerLeft: () => (
+              <TouchableOpacity onPress={() => navigation.goBack()}>
+                <MaterialIcons name="chevron-left" size={30} color="#fff" />
+              </TouchableOpacity>
+            ),
+          })}
+        />
+      </Stack.Navigator>
+    );
+  }
 
   function BottomTabs() {
     return (

@@ -40,3 +40,8 @@ export const TextIcon = styled.Text`
 
   margin-top: 10px;
 `;
+
+export const List = styled.FlatList.attrs({
+  showsVerticalScrollIndicator: false,
+  numColumns: 3,
+})``;

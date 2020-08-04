@@ -17,7 +17,7 @@ import {
   Status,
 } from './styles';
 
-const ListProvider = () => {
+const ListProvider = ({ provider, category, navigation }) => {
   const note = [1, 2, 3, 4, 5];
 
   const styles = StyleSheet.create({
@@ -46,12 +46,17 @@ const ListProvider = () => {
   return (
     <RectButton
       style={styles.containerStyle}
+      onPress={() => navigation.navigate('Menu', { provider })}
     >
       <BoxLeft>
-        <Image source={logo} />
+        <Image
+          source={{ uri: provider ? provider.avatar.url : 'https://ui-avatars.com/api/?color=A28FD0&background=F4EFFC&bold=true&format=png&size=140&rounded=true&name=SKYTOOL'}}
+        />
         <Info>
-          <Provider>The Best Esfihas</Provider>
-          <Sector>Esfirraria</Sector>
+          <Provider>
+            {provider ? provider.name : ''}
+          </Provider>
+          <Sector>{category}</Sector>
           <Evaluation>
             <Note
               data={note}
@@ -64,7 +69,9 @@ const ListProvider = () => {
         </Info>
       </BoxLeft>
 
-      <Status open={false}>FECHADO</Status>
+      <Status open={provider ? provider.open : false }>
+        {provider ? (provider.open ? 'ABERTO' : 'FECHADO') : 'FECHADO'}
+      </Status>
     </RectButton>
   );
 }

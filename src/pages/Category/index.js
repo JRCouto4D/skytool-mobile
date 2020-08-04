@@ -1,78 +1,52 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
-import barbeiro from '../../../assets/icons/BARBEIRO.png';
-import restaurante from '../../../assets/icons/RESTAURANTES.png';
-import pizzaria from '../../../assets/icons/PIZZARIA.png';
-import hamburgueria from '../../../assets/icons/HAMBURGUERIA.png';
-import salao from '../../../assets/icons/SALÃO.png';
-import anuncio from '../../../assets/icons/ANÚNCIOS.png';
-import confeitaria from '../../../assets/icons/CONFEITARIA.png';
-import esfirraria from '../../../assets/icons/ESFIHARIA.png';
-import personal from '../../../assets/icons/PERSONAL.png';
-
-
+import api from '../../services/api';
 
 import Background from '../../components/Background';
+import Categories from '../../components/Category';
+import Loading from '../../components/Loading';
 
-import { Container, Label, BoxList, BoxIcon, Image, TextIcon } from './styles';
+import { Container, Label, List } from './styles';
 
-const Category = () => {
+const Category = ({ navigation }) => {
+  const [categories, setCategories] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    async function loadCategories() {
+      setLoading(true);
+
+      const response = await api.get('/categories', {
+        params: {
+          name: '',
+          page: 1,
+        }
+      });
+
+      setCategories(response.data.categories);
+      setLoading(false);
+    }
+
+    loadCategories();
+  }, []);
+
   return (
     <Background>
-      <Container>
+      {loading ? (
+        <Loading />
+      ) : (
+        <Container>
         <Label>CATEGORIAS</Label>
 
-        <BoxList>
-          <BoxIcon>
-            <Image source={hamburgueria} />
-            <TextIcon>HAMBURGUERIA</TextIcon>
-          </BoxIcon>
-
-          <BoxIcon>
-            <Image source={pizzaria} />
-            <TextIcon>PIZZARIA</TextIcon>
-          </BoxIcon>
-
-          <BoxIcon>
-            <Image source={restaurante} />
-            <TextIcon>RESTAURANTE</TextIcon>
-          </BoxIcon>
-      </ BoxList>
-
-      <BoxList>
-        <BoxIcon>
-          <Image source={barbeiro} />
-          <TextIcon>BARBEIRO</TextIcon>
-        </BoxIcon>
-
-        <BoxIcon>
-          <Image source={salao} />
-          <TextIcon>SALÃO DE BELEZA</TextIcon>
-        </BoxIcon>
-
-        <BoxIcon>
-          <Image source={personal} />
-          <TextIcon>PERSONAL TRAINER</TextIcon>
-        </BoxIcon>
-      </BoxList>
-
-      <BoxList>
-        <BoxIcon>
-          <Image source={anuncio} />
-          <TextIcon>ANÚNCIOS</TextIcon>
-        </BoxIcon>
-
-        <BoxIcon>
-          <Image source={esfirraria} />
-          <TextIcon>ESFIRRARIA</TextIcon>
-        </BoxIcon>
-
-        <BoxIcon>
-          <Image source={confeitaria} />
-          <TextIcon>CONFEITARIA</TextIcon>
-        </BoxIcon>
-      </BoxList>
+        <List
+          data={categories}
+          keyExtractor={(item) => String(item.id)}
+          renderItem={({ item }) => (
+            <Categories category={item} navigation={navigation} />
+          )}
+        />
       </Container>
+      )}
     </Background>
   );
 }
