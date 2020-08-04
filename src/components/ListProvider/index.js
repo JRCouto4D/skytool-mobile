@@ -19,7 +19,6 @@ import {
 
 const ListProvider = ({ provider, category, navigation }) => {
   const note = [1, 2, 3, 4, 5];
-  const providers = provider;
 
   const styles = StyleSheet.create({
     containerStyle: {
@@ -47,14 +46,15 @@ const ListProvider = ({ provider, category, navigation }) => {
   return (
     <RectButton
       style={styles.containerStyle}
+      onPress={() => navigation.navigate('Menu', { provider })}
     >
       <BoxLeft>
         <Image
-          source={{ uri: providers ? providers.avatar.url : 'https://ui-avatars.com/api/?color=A28FD0&background=F4EFFC&bold=true&format=png&size=140&rounded=true&name=SKYTOOL'}}
+          source={{ uri: provider ? provider.avatar.url : 'https://ui-avatars.com/api/?color=A28FD0&background=F4EFFC&bold=true&format=png&size=140&rounded=true&name=SKYTOOL'}}
         />
         <Info>
           <Provider>
-            {providers ? providers.name : ''}
+            {provider ? provider.name : ''}
           </Provider>
           <Sector>{category}</Sector>
           <Evaluation>
@@ -69,8 +69,8 @@ const ListProvider = ({ provider, category, navigation }) => {
         </Info>
       </BoxLeft>
 
-      <Status open={providers ? providers.open : false }>
-        {providers ? (providers.open ? 'ABERTO' : 'FECHADO') : 'FECHADO'}
+      <Status open={provider ? provider.open : false }>
+        {provider ? (provider.open ? 'ABERTO' : 'FECHADO') : 'FECHADO'}
       </Status>
     </RectButton>
   );
