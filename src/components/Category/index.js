@@ -9,11 +9,12 @@ import lista from '../../../assets/icons/CATEGORIAS.png';
 
 import { Container, BoxList, BoxIcon, Image, TextIcon } from './styles';
 
-const Category = ({ category }) => {
-  console.tron.log(category);
+const Category = ({ category, navigation }) => {
   return (
     <Container>
-      <BoxIcon>
+      <BoxIcon
+        onPress={() => navigation.navigate('LisProvider', { category })}
+      >
         <Image source={{ uri: category.image.url }} />
         <TextIcon>{category.name}</TextIcon>
       </BoxIcon>

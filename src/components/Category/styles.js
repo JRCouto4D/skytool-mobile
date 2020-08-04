@@ -12,10 +12,11 @@ export const BoxIcon = styled.TouchableOpacity`
   flex: 1;
   background: #FFF;
   margin: 2px;
-  padding: 15px;
+  padding: 10px;
 
   justify-content: center;
   align-items: center;
+  text-align: center;
 `;
 
 export const Image = styled.Image`
