@@ -68,7 +68,11 @@ const List = ({ route, navigation }) => {
             data={providers}
             keyExtractor={(item) => String(item.id)}
             renderItem={({ item }) => (
-              <ListProvider provider={item} category={category.name} />
+              <ListProvider
+                provider={item} 
+                category={category.name} 
+                navigation={navigation} 
+              />
             )}
           />
         </>
