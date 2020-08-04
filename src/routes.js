@@ -13,6 +13,7 @@ import ListCategory from './pages/Category';
 import ListProvider from './pages/Category/List';
 import Favorites from './pages/Favorites';
 import Profile from './pages/Profile';
+import Menu from './pages/Menu';
 
 export default function Routes() {
   const Stack = createStackNavigator();
@@ -30,7 +31,7 @@ export default function Routes() {
             backgroundColor: '#9F0D8B',
           },
           headerLeftContainerStyle: {
-            marginLeft: 20,
+            marginLeft: 10,
           },
         }}
       >
@@ -49,6 +50,20 @@ export default function Routes() {
           options={({ route, navigation }) => ({
             headerTitleAlign: 'center',
             title: route.params.category.name,
+            headerLeft: () => (
+              <TouchableOpacity onPress={() => navigation.goBack()}>
+                <MaterialIcons name="chevron-left" size={30} color="#fff" />
+              </TouchableOpacity>
+            ),
+          })}
+        />
+
+        <Stack.Screen
+          name="Menu"
+          component={Menu}
+          options={({ route, navigation }) => ({
+            headerTitleAlign: 'center',
+            title: route.params.provider.name,
             headerLeft: () => (
               <TouchableOpacity onPress={() => navigation.goBack()}>
                 <MaterialIcons name="chevron-left" size={30} color="#fff" />
