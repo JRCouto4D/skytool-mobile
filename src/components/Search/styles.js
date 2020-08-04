@@ -1,8 +1,6 @@
 import styled from 'styled-components/native';
 
-export const Container = styled.View`
-
-`;
+export const Container = styled.View``;
 
 export const Label = styled.Text`
   font-size: 14px;
@@ -11,7 +9,7 @@ export const Label = styled.Text`
   margin: 10px 0 10px 10px;
 `;
 
-export const List =styled.FlatList.attrs({
+export const List = styled.FlatList.attrs({
   showsVerticalScrollIndicator: false,
 })`
   margin-left: 10px;

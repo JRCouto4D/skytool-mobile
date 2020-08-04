@@ -20,7 +20,7 @@ const Category = ({ navigation }) => {
         params: {
           name: '',
           page: 1,
-        }
+        },
       });
 
       setCategories(response.data.categories);
@@ -36,19 +36,19 @@ const Category = ({ navigation }) => {
         <Loading />
       ) : (
         <Container>
-        <Label>CATEGORIAS</Label>
+          <Label>CATEGORIAS</Label>
 
-        <List
-          data={categories}
-          keyExtractor={(item) => String(item.id)}
-          renderItem={({ item }) => (
-            <Categories category={item} navigation={navigation} />
-          )}
-        />
-      </Container>
+          <List
+            data={categories}
+            keyExtractor={(item) => String(item.id)}
+            renderItem={({ item }) => (
+              <Categories category={item} navigation={navigation} />
+            )}
+          />
+        </Container>
       )}
     </Background>
   );
-}
+};
 
 export default Category;

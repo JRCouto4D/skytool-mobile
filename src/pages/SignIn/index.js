@@ -8,15 +8,15 @@ import logo from '../../../assets/LOGO.png';
 
 import { signInRequest } from '../../store/module/auth/actions';
 
-import { 
+import {
   Container,
-  Logo, 
-  InputBlock, 
+  Logo,
+  InputBlock,
   FormInput,
   SubmitButton,
   TextButton,
   LinkSignUp,
-  TextLink, 
+  TextLink,
 } from './styles';
 
 const SignIn = ({ navigation }) => {
@@ -33,7 +33,7 @@ const SignIn = ({ navigation }) => {
 
   return (
     <Backgrond>
-      <Container> 
+      <Container>
         <Logo source={logo} />
         <InputBlock>
           <FormInput
@@ -53,8 +53,6 @@ const SignIn = ({ navigation }) => {
             returnKeyType="send"
             onSubmitEditing={handleSubmit}
             ref={refPassword}
-            returnKeyType="send"
-            onSubmitEditing={handleSubmit}
             value={password}
             onChangeText={setPassword}
           />
@@ -74,6 +72,6 @@ const SignIn = ({ navigation }) => {
       </Container>
     </Backgrond>
   );
-}
+};
 
 export default SignIn;

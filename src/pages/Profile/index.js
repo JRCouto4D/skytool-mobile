@@ -1,11 +1,10 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Text } from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
 
 import Background from '../../components/Background';
 import Address from '../../components/Address';
 
-import { signOut } from '../../store/module/auth/actions';
+import {signOut} from '../../store/module/auth/actions';
 
 import foto from '../../../assets/foto.jpg';
 
@@ -34,7 +33,7 @@ import {
 } from './styles';
 
 const Profile = () => {
-  const { profile } = useSelector((state) => state.user);
+  const {profile} = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   function handleLogout() {
@@ -66,9 +65,7 @@ const Profile = () => {
                 <BoxPhone
                   data={profile.phones}
                   keyExtractor={(item) => String(item.id)}
-                  renderItem={({ item }) => (
-                    <Phone>{item.number}</Phone>
-                  )}
+                  renderItem={({item}) => <Phone>{item.number}</Phone>}
                 />
               </BoxContact>
             </BoxUser>
@@ -79,54 +76,51 @@ const Profile = () => {
               <ListAddress
                 data={profile.address}
                 keyExtractor={(item) => String(item.id)}
-                renderItem={({ item }) => (
-                  <Address address={item} />
-                )}
+                renderItem={({item}) => <Address address={item} />}
               />
             </BoxAddress>
           </Block>
-        
 
-        <BoxAvatar>
-          <Avatar source={foto} />
-        </BoxAvatar>
+          <BoxAvatar>
+            <Avatar source={foto} />
+          </BoxAvatar>
 
-        <BoxButton>
-          <Button 
-            text="Historico de serviços"
-            subText="Todos as suas solicitações de serviço"
-            icon="history"
+          <BoxButton>
+            <Button
+              text="Historico de serviços"
+              subText="Todos as suas solicitações de serviço"
+              icon="history"
+            />
+
+            <Button
+              text="Dados pessoais"
+              subText="Editar dados de usuário"
+              icon="perm-identity"
+            />
+
+            <Button
+              text="Endereço"
+              subText="Incluir ou editar endereços"
+              icon="room"
+            />
+
+            <Button
+              text="Telefone"
+              subText="Incluir ou editar telefones"
+              icon="call"
+            />
+          </BoxButton>
+
+          <LogoutButton
+            text="Sair"
+            subText="Acessar com outra conta"
+            icon="exit-to-app"
+            onPress={handleLogout}
           />
-
-          <Button 
-            text="Dados pessoais"
-            subText="Editar dados de usuário"
-            icon="perm-identity"
-          />
-
-          <Button 
-            text="Endereço"
-            subText="Incluir ou editar endereços"
-            icon="room"
-          />
-
-          <Button 
-            text="Telefone"
-            subText="Incluir ou editar telefones"
-            icon="call"
-          />
-        </BoxButton>
-
-        <LogoutButton
-          text="Sair"
-          subText="Acessar com outra conta"
-          icon="exit-to-app"
-          onPress={handleLogout}
-        />
-      </Content>
+        </Content>
       </Container>
     </Background>
   );
-}
+};
 
 export default Profile;

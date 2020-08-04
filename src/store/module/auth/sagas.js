@@ -3,7 +3,7 @@ import { Alert } from 'react-native';
 
 import api from '../../../services/api';
 
-import { signInSuccess, signFailure } from './actions';
+import { signInSuccess, signFailure, signUpSuccess } from './actions';
 
 export function* signIn({ payload }) {
   try {
@@ -17,7 +17,7 @@ export function* signIn({ payload }) {
     if (user.provider) {
       Alert.alert(
         'Erro no login',
-        'O usuário não pode ser prestador de serviço'
+        'O usuário não pode ser prestador de serviço',
       );
       yield put(signFailure());
       return;
@@ -33,7 +33,7 @@ export function* signIn({ payload }) {
   } catch (err) {
     Alert.alert(
       'Falha na autenticação',
-      'Houve um erro no login, verifique seus dados'
+      'Houve um erro no login, verifique seus dados',
     );
     yield put(signFailure());
   }
@@ -52,7 +52,7 @@ export function* signUp({ payload }) {
   } catch (err) {
     Alert.alert(
       'Falha na cadastro',
-      'Houve um erro no cadastro, verifique seus dados'
+      'Houve um erro no cadastro, verifique seus dados',
     );
     yield put(signFailure());
   }
@@ -78,4 +78,3 @@ export default all([
   takeLatest('@auth/SIGN_UP_REQUEST', signUp),
   takeLatest('@auth/SIGN_OUT', signOut),
 ]);
-

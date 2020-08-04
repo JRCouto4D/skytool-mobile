@@ -1,5 +1,4 @@
 import React from 'react';
-import { Text } from 'react-native';
 
 import ListProvider from '../ListProvider';
 
@@ -12,20 +11,18 @@ const Search = () => {
     <Container>
       {data.length >= 1 ? (
         <>
-        <Label>Resultados:</Label>
-        <List
-          data={data}
-          key={(item) => String(item)}
-          renderItem={({ item }) => (
-            <ListProvider />
-          )}
-        />
+          <Label>Resultados:</Label>
+          <List
+            data={data}
+            key={(item) => String(item)}
+            renderItem={() => <ListProvider />}
+          />
         </>
       ) : (
         <Failure>Nenhum resultado!</Failure>
       )}
     </Container>
   );
-}
+};
 
 export default Search;

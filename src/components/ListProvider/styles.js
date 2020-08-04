@@ -43,7 +43,7 @@ export const Status = styled.Text`
   right: 5px;
   bottom: 5px;
 
-  color: ${(props) => props.open ? '#00CC33' : '#f64c75'};
+  color: ${(props) => (props.open ? '#00CC33' : '#f64c75')};
   font-weight: bold;
   font-size: 10px;
 `;

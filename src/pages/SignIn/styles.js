@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import { Platform } from 'react-native';
 import Input from '../../components/Input';
 
 export const Container = styled.KeyboardAvoidingView.attrs({
@@ -27,7 +28,7 @@ export const FormInput = styled(Input)`
 export const SubmitButton = styled.TouchableOpacity`
   width: 100%;
   height: 46px;
-  background: #0099FF;
+  background: #0099ff;
   border-radius: 4px;
 
   justify-content: center;

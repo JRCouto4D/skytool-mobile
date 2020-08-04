@@ -1,3 +1,4 @@
+/* eslint-disable react/display-name */
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
 import { useSelector } from 'react-redux';
@@ -33,8 +34,7 @@ export default function Routes() {
           headerLeftContainerStyle: {
             marginLeft: 10,
           },
-        }}
-      >
+        }}>
         <Stack.Screen
           name="LisCategory"
           component={ListCategory}
@@ -89,8 +89,7 @@ export default function Routes() {
           labelStyle: {
             fontSize: 12,
           },
-        }}
-      >
+        }}>
         <Tabs.Screen
           name="Dashboard"
           component={Dashboard}
@@ -98,7 +97,7 @@ export default function Routes() {
             tabBarLabel: 'Inicio',
             tabBarIcon: ({ color }) => (
               <MaterialIcons name="home" size={25} color={color} />
-            )
+            ),
           }}
         />
 
@@ -109,7 +108,7 @@ export default function Routes() {
             tabBarLabel: 'Categorias',
             tabBarIcon: ({ color }) => (
               <MaterialIcons name="list" size={25} color={color} />
-            )
+            ),
           }}
         />
 
@@ -120,7 +119,7 @@ export default function Routes() {
             tabBarLabel: 'Favoritos',
             tabBarIcon: ({ color }) => (
               <MaterialIcons name="favorite" size={25} color={color} />
-            )
+            ),
           }}
         />
 
@@ -131,7 +130,7 @@ export default function Routes() {
             tabBarLabel: 'Minha conta',
             tabBarIcon: ({ color }) => (
               <MaterialIcons name="person" size={25} color={color} />
-            )
+            ),
           }}
         />
       </Tabs.Navigator>
@@ -153,29 +152,29 @@ export default function Routes() {
               component={BottomTabs}
             />
           </>
-          ) : (
-            <>
-              <Stack.Screen
-                name="SignIn"
-                options={{
-                  headerShown: false,
-                  gestureEnabled: false,
-                  animationEnabled: false,
-                }}
-                component={SignIn}
-              />
-              <Stack.Screen
-                name="SignUp"
-                options={{
-                  headerShown: false,
-                  gestureEnabled: false,
-                  animationEnabled: false,
-                }}
-                component={SignUp}
-              />
-            </>
-          )}
+        ) : (
+          <>
+            <Stack.Screen
+              name="SignIn"
+              options={{
+                headerShown: false,
+                gestureEnabled: false,
+                animationEnabled: false,
+              }}
+              component={SignIn}
+            />
+            <Stack.Screen
+              name="SignUp"
+              options={{
+                headerShown: false,
+                gestureEnabled: false,
+                animationEnabled: false,
+              }}
+              component={SignUp}
+            />
+          </>
+        )}
       </Stack.Navigator>
     </NavigationContainer>
-  )
+  );
 }

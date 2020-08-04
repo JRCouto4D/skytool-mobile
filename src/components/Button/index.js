@@ -3,7 +3,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 
 import { Container, BlockText, TextButton, SubText } from './styles';
 
-const Button = ({text, subText, style, icon, ...rest }) => {
+const Button = ({ text, subText, style, icon, ...rest }) => {
   return (
     <Container style={style} {...rest}>
       <MaterialIcons name={icon} size={35} color="#fff" />
@@ -13,6 +13,6 @@ const Button = ({text, subText, style, icon, ...rest }) => {
       </BlockText>
     </Container>
   );
-}
+};
 
 export default Button;

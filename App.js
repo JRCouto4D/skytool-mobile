@@ -11,9 +11,7 @@ import { store, persistor } from './src/store';
 import Routes from './src/routes';
 
 export default function App() {
-  YellowBox.ignoreWarnings([
-    'VirtualizedLists should never be nested',
-  ]);
+  YellowBox.ignoreWarnings(['VirtualizedLists should never be nested']);
 
   return (
     <>

@@ -1,23 +1,21 @@
 import React from 'react';
 import { View } from 'react-native';
-import gears from '../../../assets/gears_2.json';
-
 import Lottie from 'lottie-react-native';
-
-import { Container } from './styles';
+import gears from '../../../assets/gears_2.json';
 
 const Loading = () => {
   return (
-    <View style={{
-      alignItems: 'center', 
-      justifyContent: 'center', 
-      flex: 1,
-    }}>
+    <View
+      style={{
+        alignItems: 'center',
+        justifyContent: 'center',
+        flex: 1,
+      }}>
       <Lottie
-        source={gears} 
-        autoPlay 
-        autoSize 
-        loop 
+        source={gears}
+        autoPlay
+        autoSize
+        loop
         resizeMode="contain"
         style={{
           width: 150,
@@ -26,6 +24,6 @@ const Loading = () => {
       />
     </View>
   );
-}
+};
 
 export default Loading;

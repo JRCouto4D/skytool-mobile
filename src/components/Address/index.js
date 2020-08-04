@@ -1,14 +1,6 @@
 import React from 'react';
-import { Text } from 'react-native';
 
-import { 
-  Container, 
-  Title, 
-  Block, 
-  LabelBlock, 
-  Label, 
-  Value, 
-} from './styles';
+import { Container, Title, Block, LabelBlock, Label, Value } from './styles';
 
 const Address = ({ address }) => {
   return (
@@ -44,6 +36,6 @@ const Address = ({ address }) => {
       </Block>
     </Container>
   );
-}
+};
 
 export default Address;
