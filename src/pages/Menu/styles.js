@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import Lottie from 'lottie-react-native';
 
 export const Container = styled.View`
   padding: 10px;
@@ -11,6 +12,11 @@ export const Header = styled.View`
   flex-direction: row;
   align-items: center;
   width: 100%;
+`;
+
+export const Animation = styled(Lottie)`
+  position: absolute;
+  right: -10px;
 `;
 
 export const BoxAvatar = styled.View`

@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import { MaterialIcons } from '@expo/vector-icons';
 import api from '../../services/api';
 
+import close from '../../../assets/close.json';
+
 import Product from '../../components/Product';
 
 import {
@@ -23,6 +25,7 @@ import {
   BoxLeft,
   Sector,
   ListProducts,
+  Animation,
 } from './styles';
 
 const Menu = ({ route, navigation }) => {
@@ -70,6 +73,19 @@ const Menu = ({ route, navigation }) => {
 
   return (
     <Container>
+      {!provider.open && (
+      <Animation
+        source={close}
+        autoPlay
+        autoSize
+        loop
+        resizeMode="contain"
+        style={{
+          width: 150,
+          height: 150,
+        }}
+      />)}
+
       <Header>
         <BoxAvatar>
           <Avatar
