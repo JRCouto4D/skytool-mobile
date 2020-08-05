@@ -1,6 +1,8 @@
+/* eslint-disable no-nested-ternary */
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
+import PropTypes from 'prop-types';
 
 import { MaterialIcons } from '@expo/vector-icons';
 
@@ -44,7 +46,7 @@ const ListProvider = ({ provider, category, navigation }) => {
   return (
     <RectButton
       style={styles.containerStyle}
-      onPress={() => navigation.navigate('Menu', { provider })}>
+      onPress={() => navigation.navigate('Menu', { provider, category })}>
       <BoxLeft>
         <Image
           source={{
@@ -60,7 +62,7 @@ const ListProvider = ({ provider, category, navigation }) => {
             <Note
               data={note}
               keyExtractor={(item) => String(item)}
-              renderItem={({ item }) => (
+              renderItem={() => (
                 <MaterialIcons name="star" size={15} color="#F1993B" />
               )}
             />
@@ -73,6 +75,12 @@ const ListProvider = ({ provider, category, navigation }) => {
       </Status>
     </RectButton>
   );
+};
+
+ListProvider.propTypes = {
+  provider: PropTypes.shape(),
+  category: PropTypes.string,
+  navigation: PropTypes.shape(),
 };
 
 export default ListProvider;
