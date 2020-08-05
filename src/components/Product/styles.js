@@ -2,11 +2,6 @@ import styled from 'styled-components/native';
 import { RectButton } from 'react-native-gesture-handler';
 
 export const Container = styled(RectButton)`
-  flex-direction: row;
-  justify-content: space-between;
-
-  align-items: center;
-  margin-bottom: 15px;
 `;
 
 export const BoxLeft = styled.View`
@@ -17,7 +12,7 @@ export const BoxLeft = styled.View`
 export const Title = styled.Text`
   font-size: 14px;
   font-weight: bold;
-  color: #666;
+  color: #9F0D8B;
 `;
 
 export const Description = styled.Text`
@@ -26,12 +21,14 @@ export const Description = styled.Text`
 `;
 
 export const Price = styled.Text`
-  font-size: 16px;
-  color: #333;
+  font-size: 18px;
+  color: #00CC33;
   font-weight: bold;
+  margin-top: 5px;
 `;
 
 export const Image = styled.Image`
   width: 90px;
   height: 90px;
+  border-radius: 45px;
 `;
