@@ -6,7 +6,7 @@ import { formatPrice } from '../../util/format';
 
 import { Container, BoxLeft, Title, Description, Price, Image } from './styles';
 
-const Product = ({ products }) => {
+const Product = ({ products, open }) => {
   const styles = StyleSheet.create({
     containerStyle: {
       shadowColor: '#000',
@@ -29,11 +29,15 @@ const Product = ({ products }) => {
       justifyContent: 'space-between',
       alignItems: 'center',
       width: '100%',
+      opacity: open ? 1 : 0.5,
     },
   });
 
   return (
-    <RectButton style={styles.containerStyle}>
+    <RectButton
+      style={styles.containerStyle}
+      enabled={open}
+    >
       <BoxLeft>
         <Title>{products ? products.name : ''}</Title>
         <Description>{products ? products.description : ''}</Description>
