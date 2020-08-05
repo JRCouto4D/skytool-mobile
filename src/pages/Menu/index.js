@@ -126,7 +126,7 @@ const Menu = ({ route, navigation }) => {
       <ListProducts
         data={products}
         keyExtractor={(item) => String(item.id)}
-        renderItem={({ item }) => <Product products={item} />}
+        renderItem={({ item }) => <Product products={item} open={provider.open} />}
       />
     </Container>
   );
