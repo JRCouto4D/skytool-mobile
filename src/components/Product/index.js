@@ -1,10 +1,12 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
+import { RectButton } from 'react-native-gesture-handler';
+import PropTypes from 'prop-types';
+import { formatPrice } from '../../util/format';
 
-import image from '../../../assets/foto.jpg';
 import { Container, BoxLeft, Title, Description, Price, Image } from './styles';
 
-const Product = () => {
+const Product = ({ products }) => {
   const styles = StyleSheet.create({
     containerStyle: {
       shadowColor: '#000',
@@ -13,29 +15,43 @@ const Product = () => {
       shadowRadius: 4,
       elevation: 3,
 
-      width: '100%',
-
-      backgroundColor: '#fff',
-      paddingLeft: 8,
-      paddingRight: 8,
+      backgroundColor: '#FFF',
+      alignSelf: 'stretch',
+      marginRight: 10,
+      marginBottom: 15,
       paddingTop: 5,
       paddingBottom: 5,
+      paddingLeft: 8,
+      paddingRight: 8,
+      borderRadius: 4,
+
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      width: '100%',
     },
   });
 
   return (
-    <Container style={styles.containerStyle}>
+    <RectButton style={styles.containerStyle}>
       <BoxLeft>
-        <Title>Galinha Mista</Title>
-        <Description>
-          Pão de hambúrgue, filé bovino, frango, queijo, presunto, tomate
-        </Description>
-        <Price>R$ 10,00</Price>
+        <Title>{products ? products.name : ''}</Title>
+        <Description>{products ? products.description : ''}</Description>
+        <Price>{products ? formatPrice(products.value) : 'R$'}</Price>
       </BoxLeft>
 
-      <Image source={image} />
-    </Container>
+      <Image
+        source={{
+          uri: products && products.image
+            ? products.image.url
+            : 'https://ui-avatars.com/api/?color=A28FD0&background=F4EFFC&bold=true&format=png&size=140&rounded=true&name=SKYTOOL',
+        }}
+      />
+    </RectButton>
   );
+};
+
+Product.propTypes = {
+  products: PropTypes.shape(),
 };
 
 export default Product;
