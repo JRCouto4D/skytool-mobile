@@ -15,6 +15,7 @@ import ListProvider from './pages/Category/List';
 import Favorites from './pages/Favorites';
 import Profile from './pages/Profile';
 import Menu from './pages/Menu';
+import Product from './pages/Menu/Product';
 
 export default function Routes() {
   const Stack = createStackNavigator();
@@ -55,7 +56,7 @@ export default function Routes() {
             title: route.params.category.name,
             headerLeft: () => (
               <TouchableOpacity onPress={() => navigation.goBack()}>
-                <MaterialIcons name="chevron-left" size={30} color="#fff" />
+                <MaterialIcons name="arrow-back" size={30} color="#fff" />
               </TouchableOpacity>
             ),
           })}
@@ -76,7 +77,7 @@ export default function Routes() {
             },
             headerLeft: () => (
               <TouchableOpacity onPress={() => navigation.goBack()}>
-                <MaterialIcons name="chevron-left" size={30} color="#fff" />
+                <MaterialIcons name="arrow-back" size={30} color="#fff" />
               </TouchableOpacity>
             ),
             headerRight: () => (
@@ -113,6 +114,25 @@ export default function Routes() {
                 </View>
               </View>
             )
+          })}
+        />
+
+        <Stack.Screen
+          name="Product"
+          component={Product}
+          options={({ route, navigation }) => ({
+            headerTitleAlign: 'center',
+            title: route.params.name,
+            headerTitleStyle: {
+              fontSize: 16,
+            },
+            gestureEnabled: false,
+            animationEnabled: false,
+            headerLeft: () => (
+              <TouchableOpacity onPress={() => navigation.goBack()}>
+                <MaterialIcons name="arrow-back" size={30} color="#fff" />
+              </TouchableOpacity>
+            ),
           })}
         />
       </Stack.Navigator>
