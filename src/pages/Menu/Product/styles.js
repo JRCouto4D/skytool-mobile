@@ -68,7 +68,7 @@ export const PriceProduct = styled.Text`
   font-weight: bold;
   color: #FFF;
 
-  margin-top: 15px;
+  margin-top: 30px;
 `;
 
 export const BoxFooterHeader = styled.View`
