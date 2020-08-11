@@ -17,6 +17,7 @@ export const Header = styled.View`
 export const Animation = styled(Lottie)`
   position: absolute;
   right: -10px;
+  top: 5px;
 `;
 
 export const BoxAvatar = styled.View`

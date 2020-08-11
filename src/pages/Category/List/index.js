@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
+import { useIsFocused } from '@react-navigation/native';
+import { useDispatch, useSelector } from 'react-redux';
 import api from '../../../services/api';
 import Lottie from 'lottie-react-native';
 
@@ -7,6 +9,8 @@ import { MaterialIcons } from '@expo/vector-icons';
 import ListProvider from '../../../components/ListProvider';
 import Loading from '../../../components/Loading';
 import notFound from '../../../../assets/not_found.json';
+
+import { cancelToSaleRequest } from '../../../store/module/bag/actions';
 
 import { 
   Container, 
@@ -23,6 +27,10 @@ import {
 
 const List = ({ route, navigation }) => {
   const category = route.params.category;
+  const { sale_id } = useSelector((state) => state.bag);
+  const isFocused = useIsFocused();
+  const dispatch = useDispatch();
+
   const [providers, setProviders] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -44,6 +52,25 @@ const List = ({ route, navigation }) => {
     loadProvider();
     
   }, []);
+
+  useMemo(async () => {
+    if (isFocused) {
+      if (sale_id) {
+        const response = await api.get('addItem', {
+          where: {
+            sale_id,
+          }
+        });
+  
+        const itens = response.data;
+  
+        if (itens.length >= 1) {
+          itens.map((item) => api.delete(`removeItem/${item.id}`));
+        }
+      }
+      dispatch(cancelToSaleRequest(sale_id));
+    }
+  }, [isFocused]);
 
   return (
     <Container>

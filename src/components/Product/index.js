@@ -6,7 +6,7 @@ import { formatPrice } from '../../util/format';
 
 import { Container, BoxLeft, Title, Description, Price, Image } from './styles';
 
-const Product = ({ products, open }) => {
+const Product = ({ products, open, navigation }) => {
   const styles = StyleSheet.create({
     containerStyle: {
       shadowColor: '#000',
@@ -35,6 +35,7 @@ const Product = ({ products, open }) => {
 
   return (
     <RectButton
+      onPress={() => navigation.navigate('Product', products)}
       style={styles.containerStyle}
       enabled={open}
     >
@@ -57,6 +58,8 @@ const Product = ({ products, open }) => {
 
 Product.propTypes = {
   products: PropTypes.shape(),
+  open: PropTypes.bool,
+  navigation: PropTypes.shape(),
 };
 
 export default Product;
