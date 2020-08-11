@@ -5,6 +5,8 @@ import { MaterialIcons } from '@expo/vector-icons';
 import api from '../../services/api';
 
 import close from '../../../assets/close.json';
+import load from '../../../assets/loading.json';
+import Loading from '../../components/Loading';
 
 import Product from '../../components/Product';
 
@@ -123,13 +125,17 @@ const Menu = ({ route, navigation }) => {
 
       <Sector>Hambúrger:</Sector>
 
-      <ListProducts
-        data={products}
-        keyExtractor={(item) => String(item.id)}
-        renderItem={({ item }) => (
-        <Product products={item} open={provider.open} navigation={navigation} />
-        )}
-      />
+      {loading ? (
+        <Loading animation={load} />
+      ) : (
+        <ListProducts
+          data={products}
+          keyExtractor={(item) => String(item.id)}
+          renderItem={({ item }) => (
+          <Product products={item} open={provider.open} navigation={navigation} />
+          )}
+        />
+      )}
     </Container>
   );
 };
