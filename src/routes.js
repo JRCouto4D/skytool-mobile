@@ -17,6 +17,7 @@ import Favorites from './pages/Favorites';
 import Profile from './pages/Profile';
 import Menu from './pages/Menu';
 import Product from './pages/Menu/Product';
+import Cart from './pages/Cart';
 
 export default function Routes() {
   const Stack = createStackNavigator();
@@ -82,6 +83,20 @@ export default function Routes() {
             },
             gestureEnabled: false,
             animationEnabled: false,
+            headerLeft: () => (
+              <TouchableOpacity onPress={() => navigation.goBack()}>
+                <MaterialIcons name="arrow-back" size={30} color="#fff" />
+              </TouchableOpacity>
+            ),
+          })}
+        />
+
+        <Stack.Screen
+          name="Cart"
+          component={Cart}
+          options={({ route, navigation }) => ({
+            headerTitleAlign: 'center',
+            title: 'Carrinho',
             headerLeft: () => (
               <TouchableOpacity onPress={() => navigation.goBack()}>
                 <MaterialIcons name="arrow-back" size={30} color="#fff" />
