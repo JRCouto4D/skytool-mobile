@@ -11,6 +11,7 @@ import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import Dashboard from './pages/Dashboard';
 import ListCategory from './pages/Category';
+import Header from './components/Header';
 import ListProvider from './pages/Category/List';
 import Favorites from './pages/Favorites';
 import Profile from './pages/Profile';
@@ -66,54 +67,7 @@ export default function Routes() {
           name="Menu"
           component={Menu}
           options={({ route, navigation }) => ({
-            headerTitleAlign: 'center',
-            title: `${
-              route.params.provider.name.length > 18
-              ? `${route.params.provider.name.substr(0, 18)}...`
-              : route.params.provider.name
-            }`,
-            headerTitleStyle: {
-              fontSize: 16,
-            },
-            headerLeft: () => (
-              <TouchableOpacity onPress={() => navigation.goBack()}>
-                <MaterialIcons name="arrow-back" size={30} color="#fff" />
-              </TouchableOpacity>
-            ),
-            headerRight: () => (
-              <View style={{
-                flexDirection: 'row',
-                alignItems: 'center',
-              }}>
-                <TouchableOpacity onPress={() => {}}>
-                  <MaterialIcons name="search" size={25} color="#FFF" />
-                </TouchableOpacity>
-
-                <TouchableOpacity style={{ marginLeft: 6 }}>
-                  <MaterialIcons name="shopping-basket" size={25} color="#FFF" />
-                </TouchableOpacity>
-
-                <View style={{
-                  width: 15,
-                  height: 15,
-                  borderRadius: 7.5,
-                  backgroundColor: '#ff892e',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  position: 'absolute',
-                  top: -8,
-                  right: -5,
-                }}>
-                  <Text style={{
-                    fontSize: 8,
-                    color: '#FFF',
-                    fontWeight: 'bold',
-                  }}>
-                    1
-                  </Text>
-                </View>
-              </View>
-            )
+            header: () => <Header route={route} navigation={navigation} />,
           })}
         />
 
