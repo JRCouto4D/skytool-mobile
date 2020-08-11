@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { MaterialIcons } from '@expo/vector-icons';
 
 import Background from '../../../components/Background';
@@ -38,6 +38,13 @@ import {
 const Product = ({ route }) => {
   const product = route.params;
   const [amount, setAmount] = useState(1);
+  const [total, setTotal] = useState(product ? formatPrice(product.value) : '');
+
+  useMemo(() => {
+    const calc = product.value * amount;
+    const response = formatPrice(calc);
+    setTotal(response);
+  }, [product, amount]);
 
   function addItem() {
     setAmount(amount + 1);
@@ -88,7 +95,7 @@ const Product = ({ route }) => {
         </Content>
 
         <Footer>
-          <Total>R$ 30,00</Total>
+          <Total>{total}</Total>
           <BoxFooter>
             <BoxAmount>
               <RemoveButtom 
