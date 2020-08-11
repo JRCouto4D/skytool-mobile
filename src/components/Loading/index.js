@@ -1,9 +1,8 @@
 import React from 'react';
 import { View } from 'react-native';
 import Lottie from 'lottie-react-native';
-import gears from '../../../assets/gears_2.json';
 
-const Loading = () => {
+const Loading = ({ animation }) => {
   return (
     <View
       style={{
@@ -12,7 +11,7 @@ const Loading = () => {
         flex: 1,
       }}>
       <Lottie
-        source={gears}
+        source={animation}
         autoPlay
         autoSize
         loop
