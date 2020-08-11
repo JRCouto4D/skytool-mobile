@@ -7,6 +7,7 @@ import Lottie from 'lottie-react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 
 import ListProvider from '../../../components/ListProvider';
+import gears from '../../../../assets/gears_2.json';
 import Loading from '../../../components/Loading';
 import notFound from '../../../../assets/not_found.json';
 
@@ -75,7 +76,7 @@ const List = ({ route, navigation }) => {
   return (
     <Container>
       {loading ? (
-        <Loading />
+        <Loading animation={gears} />
       ) : (
         providers.length >= 1 ? (
           <>

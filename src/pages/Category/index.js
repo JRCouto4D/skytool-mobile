@@ -4,6 +4,7 @@ import api from '../../services/api';
 
 import Background from '../../components/Background';
 import Categories from '../../components/Category';
+import gears from '../../../assets/gears_2.json';
 import Loading from '../../components/Loading';
 
 import { Container, Label, List } from './styles';
@@ -33,7 +34,7 @@ const Category = ({ navigation }) => {
   return (
     <Background>
       {loading ? (
-        <Loading />
+        <Loading animation={gears} />
       ) : (
         <Container>
           <Label>CATEGORIAS</Label>
