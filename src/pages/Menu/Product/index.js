@@ -1,5 +1,4 @@
-import React from 'react';
-import { Platform } from 'react-native';
+import React, { useState } from 'react';
 import { MaterialIcons } from '@expo/vector-icons';
 
 import Background from '../../../components/Background';
@@ -38,6 +37,16 @@ import {
 
 const Product = ({ route }) => {
   const product = route.params;
+  const [amount, setAmount] = useState(1);
+
+  function addItem() {
+    setAmount(amount + 1);
+  }
+
+  function removeItem() {
+    setAmount(amount - 1);
+  }
+
   return (
     <Background>
       <Container>
@@ -82,15 +91,18 @@ const Product = ({ route }) => {
           <Total>R$ 30,00</Total>
           <BoxFooter>
             <BoxAmount>
-              <RemoveButtom>
+              <RemoveButtom 
+                disabled={amount === 1 ? true : false}
+                onPress={removeItem}
+              >
                 <MaterialIcons 
                   name="remove-circle-outline" 
                   size={20}
-                  color="#FFF" 
+                  color={amount === 1 ? "#aaa" : "#FFF"} 
                 />
               </RemoveButtom>
-              <Amount>1</Amount>
-              <AddBottom>
+              <Amount>{amount}</Amount>
+              <AddBottom onPress={addItem}>
               <MaterialIcons 
                 name="add-circle-outline" 
                 size={20}
