@@ -1,8 +1,10 @@
 import React, { useState, useMemo } from 'react';
+import { useDispatch } from 'react-redux';
 import { MaterialIcons } from '@expo/vector-icons';
 
 import Background from '../../../components/Background';
 import { formatPrice } from '../../../util/format';
+import { addToCartRequest, cancelToSaleSuccess } from '../../../store/module/bag/actions';
 
 import { 
   Container, 
@@ -35,15 +37,34 @@ import {
   FinishText,
 } from './styles';
 
-const Product = ({ route }) => {
-  const product = route.params;
+const Product = ({ route, navigation }) => {
   const [amount, setAmount] = useState(1);
-  const [total, setTotal] = useState(product ? formatPrice(product.value) : '');
+  const [comment, setComment] = useState('');
+  const [total, setTotal] = useState(product ? product.value : null);
+  const [totalView, setTotalView] = useState(
+    product ? formatPrice(product.value) : ''
+  );
+
+  const product = route.params;
+  const dispatch = useDispatch();
+
+  function addToCart() {
+    const product_id = product.id;
+    const provider_id = product.provider.id;
+    const data = {
+      amount,
+      comment,
+      total,
+    }
+    dispatch(addToCartRequest(product_id, provider_id, data));
+    navigation.goBack()
+  }
 
   useMemo(() => {
     const calc = product.value * amount;
+    setTotal(calc);
     const response = formatPrice(calc);
-    setTotal(response);
+    setTotalView(response);
   }, [product, amount]);
 
   function addItem() {
@@ -91,11 +112,14 @@ const Product = ({ route }) => {
 
           <Separator />
 
-          <Comments />
+          <Comments
+            value={comment}
+            onChangeText={setComment}
+          />
         </Content>
 
         <Footer>
-          <Total>{total}</Total>
+          <Total>{totalView}</Total>
           <BoxFooter>
             <BoxAmount>
               <RemoveButtom 
@@ -118,7 +142,7 @@ const Product = ({ route }) => {
               </AddBottom>
             </BoxAmount>
 
-            <FinishButtom>
+            <FinishButtom onPress={addToCart}>
               <FinishText>Adicionar</FinishText>
               <MaterialIcons name="shopping-cart" size={20} color="#FFF" />
             </FinishButtom>
