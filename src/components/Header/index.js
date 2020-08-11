@@ -35,7 +35,7 @@ const Header = ({ route, navigation }) => {
           <MaterialIcons name="search" size={25} color="#FFF" />
         </SeachButton>
 
-        <BagButton>
+        <BagButton onPress={() => navigation.navigate('Cart', { itens: item })}>
           <MaterialIcons name="shopping-basket" size={25} color="#FFF" />
         </BagButton>
 
