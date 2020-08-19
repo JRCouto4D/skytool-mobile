@@ -41,7 +41,7 @@ import {
 } from './styles';
 
 const Product = ({ route, navigation }) => {
-  const product = route.params.product || route.params.itemCart.product;
+  const product = route.params.itemCart ? route.params.itemCart.product : route.params.product;
   const item = route.params.itemCart;
 
   const [amount, setAmount] = useState(item ? item.amount : 1);
@@ -72,6 +72,7 @@ const Product = ({ route, navigation }) => {
     }
     dispatch(updateToItemCartRequest(item_id, data, product));
     navigation.navigate('Cart');
+    
   }
 
   useMemo(() => {
