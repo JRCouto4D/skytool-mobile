@@ -170,6 +170,7 @@ const Cart = ({ navigation }) => {
               address_id: selectedAddress,
             }
             dispatch(completeSaleSuccess(data));
+            navigation.navigate('Payment');
           } 
         } else {
           Alert.alert('### Ops!!! ###', 'Você não pode concluir o pedido sem antes selecionar o endereço para entrega');
