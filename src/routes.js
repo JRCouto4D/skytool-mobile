@@ -18,6 +18,7 @@ import Profile from './pages/Profile';
 import Menu from './pages/Menu';
 import Product from './pages/Menu/Product';
 import Cart from './pages/Cart';
+import Payment from './pages/Payment';
 
 export default function Routes() {
   const Stack = createStackNavigator();
@@ -50,6 +51,7 @@ export default function Routes() {
             animationEnabled: false,
           }}
         />
+
         <Stack.Screen
           name="LisProvider"
           component={ListProvider}
@@ -97,6 +99,20 @@ export default function Routes() {
           options={({ route, navigation }) => ({
             headerTitleAlign: 'center',
             title: 'Carrinho',
+            headerLeft: () => (
+              <TouchableOpacity onPress={() => navigation.goBack()}>
+                <MaterialIcons name="arrow-back" size={30} color="#fff" />
+              </TouchableOpacity>
+            ),
+          })}
+        />
+
+        <Stack.Screen
+          name="Payment"
+          component={Payment}
+          options={({ navigation }) => ({
+            headerTitleAlign: 'center',
+            title: 'Pagamento',
             headerLeft: () => (
               <TouchableOpacity onPress={() => navigation.goBack()}>
                 <MaterialIcons name="arrow-back" size={30} color="#fff" />
