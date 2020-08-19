@@ -79,6 +79,7 @@ export const CompletedButtom = styled.TouchableOpacity`
   height: 50px;
   justify-content: center;
   align-items: center;
+  margin-bottom: 10px;
 
   background: #00CC33;
 `;

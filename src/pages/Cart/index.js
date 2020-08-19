@@ -1,5 +1,8 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { useSelector } from 'react-redux';
+import { ActivityIndicator } from 'react-native';
+import { useSelector, useDispatch } from 'react-redux';
+
+import { removeToItemCart } from '../../store/module/bag/actions';
 
 import Address from '../../components/Address2';
 import ItensCart from '../../components/ItensCart';
@@ -23,10 +26,11 @@ import {
   TextCompletedButtom,
 } from './styles';
 
-const Cart = () => {
+const Cart = ({ navigation }) => {
+  const dispatch = useDispatch();
   const { sale_id, item: itemCart, loading } = useSelector((state) => state.bag);
-  const { product } = itemCart;
   const { profile } = useSelector((state) => state.user);
+
   const [adresses, setAdresses] = useState([]);
   const [selectedAddress, setSelectedAddress] = useState(null);
   const [sale, setSale] = useState([]);
@@ -36,7 +40,6 @@ const Cart = () => {
 
   useEffect(() => {
     async function loadAdresses() {
-      console.tron.log(itemCart);
       const response = await api.get('adresses', {
         where: {
           user_id: profile.id,
@@ -92,6 +95,24 @@ const Cart = () => {
     );
   }, [adresses, bug]);
 
+  function removeItemToCart(item_id) {
+    dispatch(removeToItemCart(item_id));
+  }
+
+  const listItensCartMemo = useMemo(() => (
+    <ListItens
+      data={itemCart}
+      keyExtractor={(item) => String(item.id)}
+      renderItem={({ item }) => (
+        <ItensCart 
+          item={item}
+          removeItemToCart={() => removeItemToCart(item.id)}
+          navigation={navigation} 
+        />
+      )}
+    />
+  ), [itemCart]);
+
   return (
     <Container>
       <Content>
@@ -101,9 +122,52 @@ const Cart = () => {
         </BoxAddress>
 
         <BoxItens>
-        <Provider>The Best Esfihas</Provider>
+          <Provider>{
+            itemCart[0] 
+            ? itemCart[0].product.provider.name 
+            : 'Carrinho de compras está vazio'
+          }</Provider>
+
+          {loading ? (
+            <BoxLoading>
+              <ActivityIndicator size="small" color="#9F0D8B" />
+            </BoxLoading>
+          ) : (
+            <>
+              {listItensCartMemo}
+
+              <AddButtom onPress={() => navigation.navigate('Menu')}>
+                <TextButtom>Continuar comprando</TextButtom>
+              </AddButtom>
+
+              <LabelBlock>
+                <TagLabel color="#ccc" size={12}>Subtotal</TagLabel>
+                <TagLabel 
+                  color="#ccc" 
+                  size={12}>R$0,00
+                </TagLabel>
+              </LabelBlock>
+
+              <LabelBlock>
+                <TagLabel color="#aaa" size={12}>Entrega</TagLabel>
+                <TagLabel 
+                  color="#aaa" 
+                  size={12}>R$0,00
+                </TagLabel>
+              </LabelBlock>
+
+              <LabelBlock style={{
+                marginTop: 20,
+              }}>
+                <TagLabel color="#333" size={18}>Total</TagLabel>
+                <TagLabel 
+                  color="#333" 
+                  size={18}>R$0,00
+                </TagLabel>
+              </LabelBlock>
+            </>
+          )}
         </BoxItens>
-        
       </Content>
 
       <CompletedButtom>
