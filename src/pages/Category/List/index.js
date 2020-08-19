@@ -66,7 +66,7 @@ const List = ({ route, navigation }) => {
         const itens = response.data;
   
         if (itens.length >= 1) {
-          itens.map((item) => api.delete(`removeItem/${item.id}`));
+          itens.map(async (item) => await api.delete(`removeItem/${item.id}`));
         }
       }
       dispatch(cancelToSaleRequest(sale_id));
