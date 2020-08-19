@@ -9,7 +9,7 @@ import {
   updateToItemCartSuccess, 
 } from './actions';
 
-import { createSaleSuccess } from '../sale/actions';
+import { createSaleSuccess, removeToSale } from '../sale/actions';
 
 export function* addToCart({ payload }) {
   const { product, provider_id, data } = payload;
@@ -102,6 +102,7 @@ export function* updateToItemCart({ payload }) {
   }
 
   yield put(updateToItemCartSuccess(item_id, data));
+  yield put(removeToSale());
 }
 
 export default all([
