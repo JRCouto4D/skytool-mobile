@@ -54,6 +54,8 @@ export default function addCart(state = INITIAL_STATE, action) {
       }
 
       case '@cart/FAILURE': {
+        draft.sale_id = null;
+        draft.item = [];
         draft.loading = false;
         break;
       }

@@ -9,6 +9,8 @@ import {
   updateToItemCartSuccess, 
 } from './actions';
 
+import { createSaleSuccess } from '../sale/actions';
+
 export function* addToCart({ payload }) {
   const { product, provider_id, data } = payload;
   let response = null;
@@ -27,6 +29,8 @@ export function* addToCart({ payload }) {
     response = yield call(api.post, `sales/${provider_id}`);
 
     const newSale = response.data;
+
+    yield put(createSaleSuccess(newSale));
 
     if (!newSale.id) {
       Alert.alert(
