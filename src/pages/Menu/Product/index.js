@@ -4,7 +4,10 @@ import { MaterialIcons } from '@expo/vector-icons';
 
 import Background from '../../../components/Background';
 import { formatPrice } from '../../../util/format';
-import { addToCartRequest, cancelToSaleSuccess } from '../../../store/module/bag/actions';
+import { 
+  addToCartRequest, 
+  updateToItemCartRequest,
+} from '../../../store/module/bag/actions';
 
 import { 
   Container, 
@@ -38,26 +41,38 @@ import {
 } from './styles';
 
 const Product = ({ route, navigation }) => {
-  const [amount, setAmount] = useState(1);
-  const [comment, setComment] = useState('');
+  const product = route.params.itemCart ? route.params.itemCart.product : route.params.product;
+  const item = route.params.itemCart;
+
+  const [amount, setAmount] = useState(item ? item.amount : 1);
+  const [comment, setComment] = useState(item ? item.comments : '');
   const [total, setTotal] = useState(product ? product.value : null);
   const [totalView, setTotalView] = useState(
     product ? formatPrice(product.value) : ''
   );
-
-  const product = route.params;
   const dispatch = useDispatch();
 
   function addToCart() {
-    const product_id = product.id;
     const provider_id = product.provider.id;
     const data = {
       amount,
       comment,
       total,
     }
-    dispatch(addToCartRequest(product_id, provider_id, data));
-    navigation.goBack()
+    dispatch(addToCartRequest(product, provider_id, data));
+    navigation.navigate('Cart');
+  }
+
+  function editItemCart() {
+    const item_id = item.id;
+    const data = {
+      amount,
+      comment,
+      total,
+    }
+    dispatch(updateToItemCartRequest(item_id, data, product));
+    navigation.navigate('Cart');
+    
   }
 
   useMemo(() => {
@@ -142,7 +157,7 @@ const Product = ({ route, navigation }) => {
               </AddBottom>
             </BoxAmount>
 
-            <FinishButtom onPress={addToCart}>
+            <FinishButtom onPress={item ? editItemCart : addToCart}>
               <FinishText>Adicionar</FinishText>
               <MaterialIcons name="shopping-cart" size={20} color="#FFF" />
             </FinishButtom>

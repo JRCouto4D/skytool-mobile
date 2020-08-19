@@ -35,7 +35,7 @@ const Product = ({ products, open, navigation }) => {
 
   return (
     <RectButton
-      onPress={() => navigation.navigate('Product', products)}
+      onPress={() => navigation.navigate('Product', { product: products })}
       style={styles.containerStyle}
       enabled={open}
     >

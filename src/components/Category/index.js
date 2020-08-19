@@ -5,7 +5,7 @@ import { Container, BoxIcon, Image, TextIcon } from './styles';
 const Category = ({ category, navigation }) => {
   return (
     <Container>
-      <BoxIcon onPress={() => navigation.navigate('LisProvider', { category })}>
+      <BoxIcon onPress={() => navigation.push('LisProvider', { category })}>
         <Image source={{ uri: category.image.url }} />
         <TextIcon>{category.name}</TextIcon>
       </BoxIcon>

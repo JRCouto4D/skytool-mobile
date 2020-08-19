@@ -1,8 +1,8 @@
-export function addToCartRequest(product_id, provider_id, data) {
+export function addToCartRequest(product, provider_id, data) {
   return {
     type: '@cart/ADD_REQUEST',
     payload: {
-      product_id,
+      product,
       provider_id,
       data,
     },
@@ -16,19 +16,20 @@ export function addToCartSuccess(sale_id, item) {
   };
 }
 
-export function updateToCartRequest(item_id, data) {
+export function updateToItemCartRequest(item_id, data, product) {
   return {
-    type: '@cart/UPDATE_REQUEST',
+    type: '@cart/UPDATE_TO_ITEM_CART_REQUEST',
     payload: { 
       item_id, 
       data,
+      product,
     },
   };
 }
 
-export function updateToCartSuccess(item_id, data) {
+export function updateToItemCartSuccess(item_id, data) {
   return {
-    type: '@cart/UPDATE_SUCCESS',
+    type: '@cart/UPDATE_TO_ITEM_CART_SUCCESS',
     payload: { 
       item_id,
       data,
@@ -36,9 +37,9 @@ export function updateToCartSuccess(item_id, data) {
   };
 }
 
-export function removeToCart(item_id) {
+export function removeToItemCart(item_id) {
   return {
-    type: '@cart/REMOVE',
+    type: '@cart/REMOVE_TO_ITEM_CART',
     payload: { item_id },
   };
 }

@@ -22,23 +22,26 @@ export default function addCart(state = INITIAL_STATE, action) {
         break;
       }
 
-      case '@cart/UPDATE_REQUEST': {
+      case '@cart/UPDATE_TO_ITEM_CART_REQUEST': {
         draft.loading = true;
         break;
       }
 
-      case '@cart/UPDATE_SUCCESS': {
+      case '@cart/UPDATE_TO_ITEM_CART_SUCCESS': {
         const { item_id, data } = action.payload;
         const productIndex = state.item.findIndex((p) => p.id === item_id);
+        console.tron.log(productIndex);
 
         if (productIndex >= 0) {
           draft.item[productIndex].amount = data.amount;
-          draft.item[productIndex].comments = data.comment;
-          draft.loading = false;
+          draft.item[productIndex].comments = data.comments;
+          draft.item[productIndex].itemTotal = data.total;
         }
+        draft.loading = false;
+        break;
       }
 
-      case '@cart/REMOVE': {
+      case '@cart/REMOVE_TO_ITEM_CART': {
         draft.loading = true;
         const { item_id } = action.payload;
         const productIndex = state.item.findIndex((p) => p.id === item_id);
@@ -51,6 +54,8 @@ export default function addCart(state = INITIAL_STATE, action) {
       }
 
       case '@cart/FAILURE': {
+        draft.sale_id = null;
+        draft.item = [];
         draft.loading = false;
         break;
       }

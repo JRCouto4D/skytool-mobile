@@ -55,21 +55,26 @@ const List = ({ route, navigation }) => {
   }, []);
 
   useMemo(async () => {
+    async function removeItens(sale_id) {
+      const response = await api.get('addItem', {
+        where: {
+          sale_id,
+        }
+      });
+
+      const itens = response.data;
+
+      if (itens.length >= 1) {
+        itens.map(async (item) => await api.delete(`removeItem/${item.id}`));
+      }
+    }
+
     if (isFocused) {
       if (sale_id) {
-        const response = await api.get('addItem', {
-          where: {
-            sale_id,
-          }
-        });
-  
-        const itens = response.data;
-  
-        if (itens.length >= 1) {
-          itens.map((item) => api.delete(`removeItem/${item.id}`));
-        }
+        await removeItens(sale_id);
+
+        dispatch(cancelToSaleRequest(sale_id));
       }
-      dispatch(cancelToSaleRequest(sale_id));
     }
   }, [isFocused]);
 
