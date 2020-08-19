@@ -17,7 +17,7 @@ const ItensCart = ({ item, removeItemToCart, navigation }) => {
         <Price>{formatPrice(item.itemTotal)}</Price>
 
         <BoxIcons>
-          <Buttom onPress={() => navigation.navigate('Product', { itemCart: item })}>
+          <Buttom onPress={() => navigation.push('Product', { itemCart: item })}>
             <MaterialIcons name="create" size={20} color="#9F0D8B" />
           </Buttom>
           <Buttom onPress={removeItemToCart}>
