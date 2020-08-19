@@ -53,10 +53,14 @@ const Cart = ({ navigation }) => {
 
   function calcTotal() {
     if (itemCart.length >= 1) {
-      if (sale.length >= 1 && infoDelivery.length >= 1) {
-        const total = sale[0].total + infoDelivery[0].price;
-        setTotal(total);
-      }
+      if (sale.length >= 1) {
+        if (infoDelivery.length >= 1) {
+          const total = sale[0].total + infoDelivery[0].price;
+          setTotal(total);
+        } else {
+          setTotal(sale[0].total);
+        }
+      } 
     } else {
       setTotal(null);
     }
