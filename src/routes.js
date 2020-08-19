@@ -77,7 +77,7 @@ export default function Routes() {
           component={Product}
           options={({ route, navigation }) => ({
             headerTitleAlign: 'center',
-            title: route.params.name,
+            title: route.params.product.name,
             headerTitleStyle: {
               fontSize: 16,
             },
