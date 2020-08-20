@@ -155,6 +155,8 @@ export default function Routes() {
           component={Category}
           options={{
             tabBarLabel: 'Categorias',
+            tabBarVisible: false,
+            
             tabBarIcon: ({ color }) => (
               <MaterialIcons name="list" size={25} color={color} />
             ),
