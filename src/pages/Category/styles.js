@@ -6,8 +6,19 @@ export const Container = styled.View`
   padding: 3px;
 `;
 
+export const Header = styled.View`
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 20px;
+`;
+
+export const BackButtom = styled.TouchableOpacity`
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+`;
+
 export const Label = styled.Text`
-  margin-bottom: 15px;
   margin-left: 10px;
   font-size: 20px;
   color: #fff;
