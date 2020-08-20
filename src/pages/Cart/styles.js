@@ -6,9 +6,7 @@ export const Container = styled.ScrollView.attrs({
     flexDirection: 'column', 
     justifyContent: 'space-between',
   }
-})`
-  padding-bottom: 10px;
-`;
+})``;
 
 export const Content = styled.View`
   padding: 15px 0 15px 15px;
@@ -79,7 +77,6 @@ export const CompletedButtom = styled.TouchableOpacity`
   height: 50px;
   justify-content: center;
   align-items: center;
-  margin-bottom: 10px;
 
   background: #00CC33;
 `;
