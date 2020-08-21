@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { formatPrice } from '../../util/format';
 import Background from '../../components/Background';
 import card from '../../../assets/cards.png';
+
+import { setFormPayment } from '../../store/module/sale/actions';
 
 import {
   Container,
@@ -32,22 +34,27 @@ import {
 
 const Payment = () => {
   const { dataSale: sale } = useSelector((state) => state.sale);
+  const dispatch = useDispatch();
 
   const [money, setMoney] = useState(true);
   const [credit, setCredit] = useState(false);
   const [changeTrue, setChangeTrue] = useState(false);
   const [changeFalse, setChanegFalse] = useState(true);
-  const [change, setChange] = useState('');
+  const [change, setChange] = useState(null);
+  const [payment, setPayment] = useState(sale ? sale.payment : 'A VISTA');
 
   function handleOptionsPayment(option){
     if (option === 0) {
       setMoney(true);
       setCredit(false);
+      setPayment('A VISTA');
     } else {
       setMoney(false);
       setCredit(true);
       setChanegFalse(true);
       setChangeTrue(false);
+      setPayment('CARTÃO');
+      setChange(null);
     }
   }
 
@@ -58,6 +65,7 @@ const Payment = () => {
     } else {
       setChangeTrue(false);
       setChanegFalse(true);
+      setChange(null);
     }
   }
 
@@ -75,6 +83,14 @@ const Payment = () => {
       handleOptionsPayment(1);
     }
   }, []);
+
+  function defineFormPayment() {
+    const data = {
+      payment,
+      change_for: Number(change),
+    }
+    dispatch(setFormPayment(data));
+  }
 
   return (
     <Background>
@@ -152,7 +168,7 @@ const Payment = () => {
           </BorderSelected>
         </Content>
 
-        <ButtonPayment>
+        <ButtonPayment onPress={defineFormPayment}>
           <TextButton>Confirmar pagamento</TextButton>
         </ButtonPayment>
       </Container>
