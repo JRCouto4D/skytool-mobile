@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import { formatPrice } from '../../util/format';
@@ -13,6 +13,7 @@ import {
   Total,
   Label,
   BorderSelected,
+  Selected,
   BoxOption,
   Option,
   Brand,
@@ -20,7 +21,8 @@ import {
   Block,
   ChangeLabel,
   BoxChangeOption,
-  BoxLeft,
+  ChangeTrue,
+  ChangeFalse,
   ResponseLabel,
   ChangeInput,
   ImageCard,
@@ -30,6 +32,35 @@ import {
 
 const Payment = () => {
   const { dataSale: sale } = useSelector((state) => state.sale);
+
+  const [money, setMoney] = useState(true);
+  const [credit, setCredit] = useState(false);
+  const [changeTrue, setChangeTrue] = useState(false);
+  const [changeFalse, setChanegFalse] = useState(true);
+  const [change, setChange] = useState('');
+
+  function handleOptionsPayment(option){
+    if (option === 0) {
+      setMoney(true);
+      setCredit(false);
+    } else {
+      setMoney(false);
+      setCredit(true);
+      setChanegFalse(true);
+      setChangeTrue(false);
+    }
+  }
+
+  function handleOptionsChange(option){
+    if (option === 0) {
+      setChangeTrue(true);
+      setChanegFalse(false);
+    } else {
+      setChangeTrue(false);
+      setChanegFalse(true);
+    }
+  }
+
   return (
     <Background>
       <Container>
@@ -41,44 +72,68 @@ const Payment = () => {
 
           <Label>Pagar com:</Label>
 
-          <BorderSelected visibled={true}>
-            <BoxOption>
-              <Option>
-                <Brand visibled={true} />
-              </Option>
-              <OptionLabel>DINHEIRO</OptionLabel>
-            </BoxOption>
-
-            <Block>
-              <ChangeLabel>Troco ?</ChangeLabel>
-              <BoxChangeOption>
-                <BoxLeft>
-                  <Option>
-                    <Brand visibled={true} />
-                  </Option>
-                  <ResponseLabel>SIM</ResponseLabel>
-                </BoxLeft>
+          <BorderSelected visibled={money}>
+            <Selected
+              onPress={() => handleOptionsPayment(0)}
+              enabled={money ? false : true}
+            >
+              <BoxOption>
                 <Option>
-                  <Brand visibled={false} />
+                  <Brand visibled={money} />
                 </Option>
-                <ResponseLabel>NÃO</ResponseLabel>
-              </BoxChangeOption>
-              <ChangeLabel>Troco para quanto ?</ChangeLabel>
-              <ChangeInput />
-            </Block> 
+                <OptionLabel>DINHEIRO</OptionLabel>
+              </BoxOption>
+
+              {money && (
+                <>
+                  <Block>
+                    {money && (
+                      <>
+                        <ChangeLabel>Troco ?</ChangeLabel>
+                        <BoxChangeOption>
+                          <ChangeTrue onPress={() => handleOptionsChange(0)}>
+                            <Option>
+                              <Brand visibled={changeTrue} />
+                            </Option>
+                            <ResponseLabel>SIM</ResponseLabel>
+                          </ChangeTrue>
+                          <ChangeFalse onPress={() => handleOptionsChange(1)}>
+                            <Option>
+                              <Brand visibled={changeFalse} />
+                            </Option>
+                            <ResponseLabel>NÃO</ResponseLabel>
+                          </ChangeFalse>
+                        </BoxChangeOption>
+                      </>
+                    )}
+                    {changeTrue && (
+                      <>
+                        <ChangeLabel>Troco para quanto ?</ChangeLabel>
+                          <ChangeInput
+                            value={change}
+                            onChangeText={setChange}
+                        />
+                      </>
+                    )}
+                  </Block>
+                </>
+              )}
+            </Selected>
           </BorderSelected>
 
-          <BorderSelected visibled={true}>
-            <BoxOption>
-              <Option>
-                <Brand visibled={true} />
-              </Option>
-              <OptionLabel>CARTÃO</OptionLabel>
-            </BoxOption>
+          <BorderSelected visibled={credit}>
+            <Selected onPress={() => handleOptionsPayment(1)}>
+              <BoxOption>
+                <Option>
+                  <Brand visibled={credit} />
+                </Option>
+                <OptionLabel>CARTÃO</OptionLabel>
+              </BoxOption>
 
-            <Block>
-              <ImageCard source={card} />
-            </Block>
+              <Block>
+                <ImageCard source={card} />
+              </Block>
+            </Selected>
           </BorderSelected>
         </Content>
 

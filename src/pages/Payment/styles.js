@@ -42,7 +42,9 @@ export const BorderSelected = styled.View`
   border-radius: 4px;
   margin-top: 10px;
 `;
-export const BoxOption = styled(RectButton)`
+
+export const Selected = styled(RectButton)``;
+export const BoxOption = styled.View`
   flex-direction: row;
   align-items: center;
   margin-bottom: 10px;
@@ -77,36 +79,28 @@ export const Block = styled.View`
 export const ChangeLabel = styled.Text`
   font-size: 12px;
   color: #FFF;
-  margin-bottom: 5px;
 `;
 export const BoxChangeOption = styled.View`
   flex-direction: row;
   align-items: center;
-  margin-bottom: 10px;
 `;
-export const BoxLeft = styled.View`
+export const ChangeTrue = styled(RectButton)`
   flex-direction: row;
   align-items: center;
-  margin-right: 20px;
+  padding: 5px 20px 10px 0;
 `;
-export const ChangeTrue = styled.View`
-  width: 8px;
-  height: 8px;
-  border-radius: 4px;
-  background: ${props => props.visibled ? '#000' : '#FFF'};
+
+export const ChangeFalse = styled(RectButton)`
+  flex-direction: row;
+  align-items: center;
+  padding: 5px 20px 10px 0;
 `;
 export const ResponseLabel = styled.Text`
   color: #fff;
   margin-left: 5px;
 `;
-export const ChangeFalse = styled.View`
-  width: 8px;
-  height: 8px;
-  border-radius: 4px;
-  background: ${props => props.visibled ? '#000' : '#FFF'};
-`;
 export const ChangeInput = styled.TextInput.attrs({
-  placeholder: 'Valor da nota que pretende pagar o pedido',
+  placeholder: 'Ex: R$100,00',
   placeholderTextColor: 'rgba(255, 255, 255, 0.4)',
 
 })`
@@ -118,6 +112,7 @@ export const ChangeInput = styled.TextInput.attrs({
   border-radius: 4px;
   padding: 4px 8px;
   color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
 `;
 
 export const ImageCard = styled.Image`
@@ -134,6 +129,6 @@ export const ButtonPayment = styled.TouchableOpacity`
 `;
 export const TextButton = styled.Text`
   color: #fff;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: bold;
 `;
