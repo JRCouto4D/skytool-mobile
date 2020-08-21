@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 import { formatPrice } from '../../util/format';
@@ -60,6 +60,21 @@ const Payment = () => {
       setChanegFalse(true);
     }
   }
+
+  useEffect(() => {
+    if(sale) {
+      if (sale.payment === 'A VISTA') {
+        handleOptionsPayment(0);
+        if (sale.change_for !== null) {
+          setChange(sale.change_for);
+        } else {
+          handleOptionsChange(1);
+        }
+      }
+    } else {
+      handleOptionsPayment(1);
+    }
+  }, []);
 
   return (
     <Background>
