@@ -12,6 +12,13 @@ export function completeSaleSuccess(data) {
   };
 }
 
+export function setFormPayment(data) {
+  return {
+    type: '@sale/SET_FORM_PAYMENT',
+    payload: { data },
+  };
+}
+
 export function removeToSale() {
   return {
     type: '@sale/REMOVE_TO_SALE',

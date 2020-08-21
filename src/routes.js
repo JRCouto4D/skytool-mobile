@@ -19,6 +19,7 @@ import Menu from './pages/Menu';
 import Product from './pages/Menu/Product';
 import Cart from './pages/Cart';
 import Payment from './pages/Payment';
+import Confirmation from './pages/Confirmation';
 
 export default function Routes() {
   const Stack = createStackNavigator();
@@ -113,6 +114,20 @@ export default function Routes() {
           options={({ navigation }) => ({
             headerTitleAlign: 'center',
             title: 'Pagamento',
+            headerLeft: () => (
+              <TouchableOpacity onPress={() => navigation.goBack()}>
+                <MaterialIcons name="arrow-back" size={30} color="#fff" />
+              </TouchableOpacity>
+            ),
+          })}
+        />
+
+        <Stack.Screen
+          name="Confirmation"
+          component={Confirmation}
+          options={({ navigation }) => ({
+            headerTitleAlign: 'center',
+            title: 'Confirmar pedido',
             headerLeft: () => (
               <TouchableOpacity onPress={() => navigation.goBack()}>
                 <MaterialIcons name="arrow-back" size={30} color="#fff" />
