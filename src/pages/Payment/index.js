@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useMemo, useRef } from 'react';
+import { Alert } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
+import { useIsFocused } from '@react-navigation/native';
 
 import { formatPrice } from '../../util/format';
 import Background from '../../components/Background';
@@ -32,16 +34,18 @@ import {
   TextButton,
 } from './styles';
 
-const Payment = () => {
-  const { dataSale: sale } = useSelector((state) => state.sale);
+const Payment = ({ navigation }) => {
+  const { dataSale } = useSelector((state) => state.sale);
   const dispatch = useDispatch();
+  const isFocused = useIsFocused();
+  const inputChange = useRef();
 
   const [money, setMoney] = useState(true);
   const [credit, setCredit] = useState(false);
   const [changeTrue, setChangeTrue] = useState(false);
   const [changeFalse, setChanegFalse] = useState(true);
-  const [change, setChange] = useState(null);
-  const [payment, setPayment] = useState(sale ? sale.payment : 'A VISTA');
+  const [change, setChange] = useState(dataSale ? String(dataSale.change_for) : '');
+  const [payment, setPayment] = useState(dataSale ? dataSale.payment : 'A VISTA');
 
   function handleOptionsPayment(option){
     if (option === 0) {
@@ -54,7 +58,7 @@ const Payment = () => {
       setChanegFalse(true);
       setChangeTrue(false);
       setPayment('CARTÃO');
-      setChange(null);
+      setChange('');
     }
   }
 
@@ -62,34 +66,47 @@ const Payment = () => {
     if (option === 0) {
       setChangeTrue(true);
       setChanegFalse(false);
+      if (dataSale.change_for === null || dataSale.change_for === 0) {
+        setChange('');
+        return;
+      }
+      setChange(String(dataSale.change_for));
     } else {
       setChangeTrue(false);
       setChanegFalse(true);
-      setChange(null);
+      setChange('');
     }
   }
 
-  useEffect(() => {
-    if(sale) {
-      if (sale.payment === 'A VISTA') {
-        handleOptionsPayment(0);
-        if (sale.change_for !== null) {
-          setChange(sale.change_for);
+  useMemo(() => {
+    if (isFocused) {
+      if(dataSale) {
+        if (dataSale.payment === 'A VISTA') {
+          handleOptionsPayment(0);
+          if (dataSale.change_for === null || dataSale.change_for === 0) {
+            handleOptionsChange(1);
+          } else {
+            handleOptionsChange(0);
+          }
         } else {
-          handleOptionsChange(1);
+          handleOptionsPayment(1);
         }
       }
-    } else {
-      handleOptionsPayment(1);
     }
-  }, []);
+  }, [isFocused]);
 
   function defineFormPayment() {
-    const data = {
-      payment,
-      change_for: Number(change),
+    if (changeTrue && change === '') {
+      Alert.alert('### Ops!!! ###', 'Informe para quanto é o seu troco');
+      inputChange.current.focus();
+    } else {
+      const data = {
+        payment,
+        change_for: Number(change),
+      }
+      dispatch(setFormPayment(data));
+      navigation.push('Confirmation');
     }
-    dispatch(setFormPayment(data));
   }
 
   return (
@@ -98,7 +115,7 @@ const Payment = () => {
         <Content>
           <Header>
             <LabelTotal>Valor à pagar:</LabelTotal>
-            <Total>{formatPrice(sale.total)}</Total>
+            <Total>{formatPrice(dataSale.total)}</Total>
           </Header>
 
           <Label>Pagar com:</Label>
@@ -140,9 +157,10 @@ const Payment = () => {
                     {changeTrue && (
                       <>
                         <ChangeLabel>Troco para quanto ?</ChangeLabel>
-                          <ChangeInput
-                            value={change}
-                            onChangeText={setChange}
+                        <ChangeInput
+                          value={change}
+                          onChangeText={setChange}
+                          ref={inputChange}
                         />
                       </>
                     )}
