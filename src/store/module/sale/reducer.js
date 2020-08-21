@@ -19,6 +19,13 @@ export default function sale(state = INITIAL_STATE, action) {
         break;
       }
 
+      case '@sale/SET_FORM_PAYMENT': {
+        const { data } = action.payload;
+        draft.dataSale.payment = data.payment;
+        draft.dataSale.change_for = data.change_for;
+        break;
+      }
+
       case '@cart/CANCEL_SALE_SUCCESS': {
         draft.dataSale = null
         break;
