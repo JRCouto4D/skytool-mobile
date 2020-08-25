@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
+import { Alert } from 'react-native';
 import { useIsFocused } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 import api from '../../../services/api';
@@ -55,25 +56,12 @@ const List = ({ route, navigation }) => {
   }, []);
 
   useMemo(async () => {
-    async function removeItens(sale_id) {
-      const response = await api.get('addItem', {
-        where: {
-          sale_id,
-        }
-      });
-
-      const itens = response.data;
-
-      if (itens.length >= 1) {
-        itens.map(async (item) => await api.delete(`removeItem/${item.id}`));
-      }
-    }
-
     if (isFocused) {
-      if (sale_id) {
-        await removeItens(sale_id);
-
-        dispatch(cancelToSaleRequest(sale_id));
+      try {
+        await api.delete('/orders/reset');
+      } catch (err) {
+        Alert.alert('### ERRO ###', 'Algo deu errado!!!');
+        navigation.navigate('Dashboard');
       }
     }
   }, [isFocused]);
