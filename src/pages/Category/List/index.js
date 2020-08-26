@@ -1,18 +1,17 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { Alert } from 'react-native';
 import { useIsFocused } from '@react-navigation/native';
-import { useDispatch, useSelector } from 'react-redux';
+import { MaterialIcons } from '@expo/vector-icons';
+import { useDispatch } from 'react-redux';
+
+import { resetToCart } from '../../../store/module/cart/actions';
+import { resetSale } from '../../../store/module/sale/actions';
 import api from '../../../services/api';
 import Lottie from 'lottie-react-native';
-
-import { MaterialIcons } from '@expo/vector-icons';
-
 import ListProvider from '../../../components/ListProvider';
 import gears from '../../../../assets/gears_2.json';
 import Loading from '../../../components/Loading';
 import notFound from '../../../../assets/not_found.json';
-
-import { cancelToSaleRequest } from '../../../store/module/bag/actions';
 
 import { 
   Container, 
@@ -29,10 +28,8 @@ import {
 
 const List = ({ route, navigation }) => {
   const category = route.params.category;
-  const { sale_id } = useSelector((state) => state.bag);
-  const isFocused = useIsFocused();
   const dispatch = useDispatch();
-
+  const isFocused = useIsFocused();
   const [providers, setProviders] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -59,6 +56,8 @@ const List = ({ route, navigation }) => {
     if (isFocused) {
       try {
         await api.delete('/orders/reset');
+        dispatch(resetToCart());
+        dispatch(resetSale());
       } catch (err) {
         Alert.alert('### ERRO ###', 'Algo deu errado!!!');
         navigation.navigate('Dashboard');
