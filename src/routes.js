@@ -13,7 +13,7 @@ import Dashboard from './pages/Dashboard';
 import ListCategory from './pages/Category';
 import Header from './components/Header';
 import ListProvider from './pages/Category/List';
-import Favorites from './pages/Favorites';
+import Orders from './pages/Orders';
 import Profile from './pages/Profile';
 import Menu from './pages/Menu';
 import Product from './pages/Menu/Product';
@@ -179,12 +179,12 @@ export default function Routes() {
         />
 
         <Tabs.Screen
-          name="Favorites"
-          component={Favorites}
+          name="Orders"
+          component={Orders}
           options={{
-            tabBarLabel: 'Favoritos',
+            tabBarLabel: 'Pedidos',
             tabBarIcon: ({ color }) => (
-              <MaterialIcons name="favorite" size={25} color={color} />
+              <MaterialIcons name="line-weight" size={25} color={color} />
             ),
           }}
         />
