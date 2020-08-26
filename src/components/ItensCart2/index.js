@@ -3,11 +3,11 @@ import { formatPrice } from '../../util/format';
 
 import { Container, Item, Price } from './styles';
 
-const ItensCart2 = () => {
+const ItensCart2 = ({ itens }) => {
   return (
     <Container>
-      <Item>2x ESFIHAS | Carne (Sem temperos extras)</Item>
-      <Price>{formatPrice(7.5)}</Price>
+      <Item>{`${itens.amount}x  ${itens.product.sector} | ${itens.product.name}${itens.comments !== '' ? `(${itens.comments})` : ''}`}</Item>
+      <Price>{formatPrice(itens.itemTotal)}</Price>
     </Container>
   );
 }
