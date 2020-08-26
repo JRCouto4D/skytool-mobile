@@ -19,8 +19,21 @@ export function setFormPayment(data) {
   };
 }
 
-export function removeToSale() {
+export function resetSale() {
   return {
-    type: '@sale/REMOVE_TO_SALE',
+    type: '@sale/RESET_SALE',
   }
+}
+
+export function confirmToSaleRequest(data) {
+  return {
+    type: '@sale/CONFIRM_TO_SALE_REQUEST',
+    payload: { data },
+  };
+}
+
+export function confirmToSaleSuccess() {
+  return {
+    type: '@sale/CONFIRM_TO_SALE_SUCCESS',
+  };
 }

@@ -2,6 +2,8 @@ import produce from 'immer';
 
 const INITIAL_STATE = {
   dataSale: null,
+  subtotal: null,
+  priceDelivery: null,
 };
 
 export default function sale(state = INITIAL_STATE, action) {
@@ -16,6 +18,8 @@ export default function sale(state = INITIAL_STATE, action) {
         const { data } = action.payload;
         draft.dataSale.total = data.total;
         draft.dataSale.address_id = data.address_id;
+        draft.subtotal = data.subtotal;
+        draft.priceDelivery = data.priceDelivery;
         break;
       }
 
@@ -25,9 +29,11 @@ export default function sale(state = INITIAL_STATE, action) {
         draft.dataSale.change_for = data.change_for;
         break;
       }
-
-      case '@cart/CANCEL_SALE_SUCCESS': {
+      
+      case '@sale/RESET_SALE': {
         draft.dataSale = null
+        draft.subtotal = null;
+        draft.priceDelivery = null;
         break;
       }
     }
