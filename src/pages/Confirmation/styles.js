@@ -55,7 +55,7 @@ export const BlockFooter = styled.View`
 `;
 
 export const BoxLeft = styled.View`
-  width: 72%;
+  width: 70%;
 `;
 
 export const BoxLeftHeader = styled.View`
@@ -63,7 +63,7 @@ export const BoxLeftHeader = styled.View`
 `;
 
 export const BoxRigth = styled.View`
-  width: 28%;
+  width: 30%;
 `;
 
 export const BoxImage = styled.View`
@@ -84,7 +84,7 @@ export const Image = styled.Image`
   border-radius: 50px;
 `;
 
-export const Buttom = styled.View`
+export const Buttom = styled.TouchableOpacity`
   justify-content: center;
   align-items: center;
 

@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
 import { formatPrice } from '../../util/format';
+import api from '../../services/api';
+import { confirmToSaleRequest } from '../../store/module/sale/actions';
 
 import Background from '../../components/Background';
 import Itens from '../../components/ItensCart2';
-import image from '../../../assets/foto.jpg';
 
 import {
   Container,
@@ -23,8 +26,34 @@ import {
   ButtomText,
 } from './styles';
 
-const Confirmation = () => {
-  const itens = [1, 2, 3];
+const Confirmation = ({ navigation, route }) => {
+  const { provider } = route.params;
+  const { dataSale, subtotal, priceDelivery } = useSelector((state) => state.sale);
+  const { address } = useSelector((state) => state.user.profile);
+  const itens = useSelector((state) => state.cart.item);
+
+  const dispatch = useDispatch();
+
+  const [dataAddress, setDataAddress] = useState(null);
+
+  useEffect(() => {
+    const data = address.filter(ad => ad.id === dataSale.address_id);
+    setDataAddress(data);
+  }, []);
+
+  function confirmToSale() {
+    const data = {
+      sale_id: dataSale.id,
+      payment: dataSale.payment,
+      change_for: dataSale.change_for === 0 ? null : dataSale.change_for,
+      address_id: dataSale.address_id, 
+    };
+
+    dispatch(confirmToSaleRequest(data));
+    navigation.reset({
+      routes: [{ name: 'Orders'}],
+    });
+  }
 
   return (
     <Background>
@@ -39,12 +68,12 @@ const Confirmation = () => {
             size={12}
             weigth={'normal'}
             color="rgba(255, 255, 255, 0.9)"
-          >#200</Label>
+          >{`#${dataSale.id}`}</Label>
           <ListItens
             data={itens}
-            keyExtractor={(item) => String(item)}
-            renderItem={() => (
-              <Itens />
+            keyExtractor={(item) => String(item.id)}
+            renderItem={({ item }) => (
+              <Itens itens={item} />
             )}
           />
 
@@ -60,7 +89,7 @@ const Confirmation = () => {
                 size={14}
                 weigth="normal"
                 color="rgba(255, 255, 255, 0.7)"
-              >{formatPrice(22.5)}</Label>
+              >{formatPrice(subtotal)}</Label>
             </Block>
 
             <Block>
@@ -74,7 +103,7 @@ const Confirmation = () => {
                 size={14}
                 weigth="normal"
                 color="rgba(255, 255, 255, 0.7)"
-              >{formatPrice(5)}</Label>
+              >{formatPrice(priceDelivery)}</Label>
             </Block>
           </BoxInfoSale>
 
@@ -89,7 +118,7 @@ const Confirmation = () => {
               size={20}
               weigth="normal"
               color="rgba(255, 255, 255, 0.9)"
-            >{formatPrice(27.5)}</Label>
+            >{dataSale ? formatPrice(dataSale.total) : 'R$0,00'}</Label>
           </Block>
 
             <Footer>
@@ -111,7 +140,10 @@ const Confirmation = () => {
                       size={10}
                       weigth="normal"
                       color="rgba(255, 255, 255, 0.7)"
-                    > Joel Santos - 41</Label>
+                    >{dataAddress 
+                      ? ` ${dataAddress[0].street} - ${dataAddress[0].number}` 
+                      : ''
+                    }</Label>
                   </BlockFooter>
 
                   <BlockFooter>
@@ -125,7 +157,7 @@ const Confirmation = () => {
                       size={10}
                       weigth="normal"
                       color="rgba(255, 255, 255, 0.7)"
-                    > Otávio Camões</Label>
+                    >{dataAddress ? ` ${dataAddress[0].neighborhood}` : ''}</Label>
                   </BlockFooter>
                 </BoxLeftHeader>
 
@@ -140,7 +172,7 @@ const Confirmation = () => {
                       size={10}
                       weigth="normal"
                       color="rgba(255, 255, 255, 0.7)"
-                    > Itapetinga</Label>
+                    >{dataAddress ? ` ${dataAddress[0].city}` : ''}</Label>
                   </BlockFooter>
 
                   <BlockFooter>
@@ -154,7 +186,7 @@ const Confirmation = () => {
                       size={10}
                       weigth="normal"
                       color="rgba(255, 255, 255, 0.7)"
-                    > Bahia</Label>
+                    >{dataAddress ? ` ${dataAddress[0].state}` : ''}</Label>
                   </BlockFooter>
                 <BlockFooter>
                   <Label
@@ -167,7 +199,7 @@ const Confirmation = () => {
                     size={10}
                     weigth="normal"
                     color="rgba(255, 255, 255, 0.7)"
-                  > 45700-000</Label>
+                  >{dataAddress ? ` ${dataAddress[0].zip_code}` : ''}</Label>
                 </BlockFooter>
               </BoxLeft>
 
@@ -183,23 +215,39 @@ const Confirmation = () => {
                     size={10}
                     weigth="bold"
                     color="rgba(255, 255, 255, 0.7)"
-                  >DINHEIRO</Label>
+                  >
+                    {dataSale.payment === 'A VISTA'
+                    ? 'DINHEIRO'
+                    : 'CARTÃO'
+                  }
+                  </Label>
 
                   <Label
                     size={10}
                     weigth="bold"
                     color="rgba(255, 255, 255, 0.7)"
-                  >Troco para R$50,00</Label>
+                  >
+                    {dataSale.change_for === 0 || dataSale.change_for === null
+                     ? ''
+                     : `Troco para ${formatPrice(Number(dataSale.change_for))}` 
+                    }
+                  </Label>
                 </BoxLeftHeader>
               </BoxRigth>
             </Footer>
         </Content>
 
         <BoxImage>
-          <Image source={image} />
+          <Image
+            source={{
+              uri: provider && provider.avatar
+                ? provider.avatar.url
+                : `https://ui-avatars.com/api/?color=A28FD0&background=F4EFFC&bold=true&format=png&size=140&rounded=true&name=${provider ? provider.name : 'SKYTOOL'}`,
+            }}
+          />
         </BoxImage>
 
-        <Buttom onPress={() => {}}>
+        <Buttom onPress={confirmToSale}>
           <ButtomText>Confirmar pedido</ButtomText>
         </Buttom>
       </Container>
