@@ -7,7 +7,7 @@ import { formatPrice } from '../../../util/format';
 import { 
   addToCartRequest, 
   updateToItemCartRequest,
-} from '../../../store/module/bag/actions';
+} from '../../../store/module/cart/actions';
 
 import { 
   Container, 
