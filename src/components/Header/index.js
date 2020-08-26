@@ -14,7 +14,7 @@ import {
 } from './styles';
 
 const Header = ({ route, navigation }) => {
-  const { item } = useSelector((state) => state.bag);
+  const { item } = useSelector((state) => state.cart);
 
   return (
     <Container>

@@ -3,12 +3,12 @@ import { Text } from 'react-native';
 
 import { Container } from './styles';
 
-const Favorites = () => {
+const Orders = () => {
   return (
     <Container>
-      <Text>Favorites</Text>
+      <Text>Orders</Text>
     </Container>
   );
 };
 
-export default Favorites;
+export default Orders;

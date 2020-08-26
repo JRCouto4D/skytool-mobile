@@ -100,7 +100,7 @@ export const ResponseLabel = styled.Text`
   margin-left: 5px;
 `;
 export const ChangeInput = styled.TextInput.attrs({
-  placeholder: 'Ex: R$100,00',
+  placeholder: 'Apenas numeros',
   placeholderTextColor: 'rgba(255, 255, 255, 0.4)',
 
 })`

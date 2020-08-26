@@ -2,8 +2,8 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { ActivityIndicator, Alert } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { removeToItemCart } from '../../store/module/bag/actions';
 import { completeSaleSuccess } from '../../store/module/sale/actions';
+import { removeToCart } from '../../store/module/cart/actions';
 import { formatPrice } from '../../util/format';
 
 import Address from '../../components/Address2';
@@ -30,7 +30,8 @@ import {
 
 const Cart = ({ navigation }) => {
   const dispatch = useDispatch();
-  const { sale_id, item: itemCart, loading } = useSelector((state) => state.bag);
+  const { item: itemCart, loading } = useSelector((state) => state.cart);
+  const { dataSale } = useSelector((state) => state.sale);
   const { profile } = useSelector((state) => state.user);
   const [adresses, setAdresses] = useState([]);
   const [selectedAddress, setSelectedAddress] = useState(null);
@@ -67,12 +68,8 @@ const Cart = ({ navigation }) => {
   }
 
   async function loadSale() {
-    if (sale_id) {
-      const response = await api.get('sales', {
-        where: {
-          id: sale_id,
-        }
-      });
+    if (dataSale) {
+      const response = await api.get(`/provider/${dataSale.provider_id}/orders/list`);
 
       setSale(response.data);
     }
@@ -137,8 +134,8 @@ const Cart = ({ navigation }) => {
 
   async function removeItemToCart(item_id) {
     try {
-      await api.delete(`removeItem/${item_id}`);
-      dispatch(removeToItemCart(item_id));
+      await api.delete(`item/${item_id}/remove`);
+      dispatch(removeToCart(item_id));
     } catch (err) {
       Alert.alert('Erro', 'Algo deu errado ao remover o item do carrinho');
     }
@@ -165,23 +162,25 @@ const Cart = ({ navigation }) => {
   useMemo(() => calcTotal(), [sale, infoDelivery]);
 
   async function completeOrder() {
-    console.tron.log('completeOrder');
-      if (itemCart.length >= 1) {
-        if (selectedAddress) {
-          if (total) {
-            const data = {
-              total,
-              address_id: selectedAddress,
-            }
-            dispatch(completeSaleSuccess(data));
-            navigation.navigate('Payment');
-          } 
-        } else {
-          Alert.alert('### Ops!!! ###', 'Você não pode concluir o pedido sem antes selecionar o endereço para entrega');
-        }
+    if (itemCart.length >= 1) {
+      if (selectedAddress) {
+        if (total) {
+          const data = {
+            subtotal: sale[0].total,
+            priceDelivery: infoDelivery.length >= 1 ? infoDelivery[0].price : 0,
+            total,
+            address_id: selectedAddress,
+          }
+          dispatch(completeSaleSuccess(data));
+
+          navigation.navigate('Payment', { provider: sale[0].provider });
+        } 
       } else {
-        Alert.alert('### Ops!!! ###', 'Você não pode concluir o pedido estando com o carrinho vazio.');
+        Alert.alert('### Ops!!! ###', 'Você não pode concluir o pedido sem antes selecionar o endereço para entrega');
       }
+    } else {
+      Alert.alert('### Ops!!! ###', 'Você não pode concluir o pedido estando com o carrinho vazio.');
+    }
   }
 
   return (

@@ -34,7 +34,8 @@ import {
   TextButton,
 } from './styles';
 
-const Payment = ({ navigation }) => {
+const Payment = ({ route, navigation }) => {
+  const { provider } = route.params;
   const { dataSale } = useSelector((state) => state.sale);
   const dispatch = useDispatch();
   const isFocused = useIsFocused();
@@ -105,7 +106,7 @@ const Payment = ({ navigation }) => {
         change_for: Number(change),
       }
       dispatch(setFormPayment(data));
-      navigation.push('Confirmation');
+      navigation.push('Confirmation', { provider });
     }
   }
 
