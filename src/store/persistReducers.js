@@ -6,7 +6,7 @@ export default (reducers) => {
     {
       key: 'mobile',
       storage: AsyncStorage,
-      whitelist: ['auth', 'user', 'bag', 'sale'],
+      whitelist: ['auth', 'user', 'cart', 'sale'],
     },
     reducers,
   );
