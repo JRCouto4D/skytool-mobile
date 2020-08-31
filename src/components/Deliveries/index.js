@@ -90,7 +90,7 @@ const Deliveries = () => {
         )}
       />
     );
-  }, [bug]);
+  }, [orders, bug]);
 
   return (
     <Container>
