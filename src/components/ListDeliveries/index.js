@@ -1,9 +1,7 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useState, useEffect } from 'react';
 import { MaterialIcons } from '@expo/vector-icons';
+import { format, parseISO } from 'date-fns';
 
-import Loading from '../Loading';
-import load from '../../../assets/loading.json';
 import { styles } from '../../util/globalStyles';
 import {
   Container,
@@ -38,7 +36,62 @@ import {
 
 const ListDeliveries = ({ order, handleDetailstrue, handleDetailsfalse }) => {
   const { order: item, details } = order;
-  console.tron.log(item);
+  const [accept, setAccept] = useState(true);
+  const [production, setProduction] = useState(false);
+  const [delivered, setDelivered] = useState(false);
+  const [complete, setComplete] = useState(false);
+  const [canceled, setCanceled] = useState(false);
+  const [status, setStatus] = useState('');
+
+  function formatDate(date) {
+    const formattedDate = format(parseISO(date), 'dd/MM/yyyy');
+    return formattedDate;
+  }
+
+  function formatTime(time) {
+    const formattedTime = format(parseISO(time), "HH:mm' hs'");
+    return formattedTime;
+  }
+
+  function handleStatus() {
+    if (item.canceled_at !== null) {
+      setCanceled(true);
+      setStatus('Cancelada');
+      return;
+    }
+
+    if (item.finished_at !== null) {
+      setComplete(true);
+      setDelivered(true);
+      setProduction(true);
+      setStatus('Entregue');
+      return;
+    }
+
+    if (item.delivered_at !== null && item.finished_at === null) {
+      setDelivered(true);
+      setProduction(true);
+      setStatus('Saiu para entrega');
+      return;
+    }
+
+    if (item.production_at !== null 
+      && item.delivered_at === null 
+      && item.finished_at === null) {
+      setProduction(true);
+      setStatus('Está em produção');
+      return;
+    }
+    setCanceled(false);
+    setComplete(false);
+    setDelivered(false);
+    setProduction(false);
+    setStatus('Aceita');
+  }
+
+  useEffect(() => {
+    handleStatus();
+  }, [item ,status]);
 
   return (
     <Container style={styles.containerStyle}>
@@ -60,12 +113,12 @@ const ListDeliveries = ({ order, handleDetailstrue, handleDetailsfalse }) => {
 
                 <BlockLabel>
                   <Label>Data:</Label>
-                  <Value>26/08/2020</Value>
+                  <Value>{formatDate(item.completed_at)}</Value>
                 </BlockLabel>
 
                 <BlockLabel>
                   <Label>Status:</Label>
-                  <Value>Saiu para entrega</Value>
+                  <Value>{status}</Value>
                 </BlockLabel>
               </InfoOrder>
             </BoxInfo>
@@ -84,28 +137,28 @@ const ListDeliveries = ({ order, handleDetailstrue, handleDetailsfalse }) => {
                 <LineStatus />
                 <BoxStatus>
                   <BoxBall>
-                    <Ball status={true} />
+                    <Ball status={accept} />
                   </BoxBall>
                   <Status>Aceito</Status>
                 </BoxStatus>
 
                 <BoxStatus>
                   <BoxBall>
-                    <Ball status={true} />
+                    <Ball status={production} />
                   </BoxBall>
                   <Status>Em produção</Status>
                 </BoxStatus>
 
                 <BoxStatus>
                   <BoxBall>
-                    <Ball status={false} />
+                    <Ball status={delivered} />
                   </BoxBall>
                   <Status>Saiu para entrega</Status>
                 </BoxStatus>
 
                 <BoxStatus>
                   <BoxBall>
-                    <Ball status={false} />
+                    <Ball status={complete} />
                   </BoxBall>
                   <Status>Entregue</Status>
                 </BoxStatus>
@@ -115,24 +168,27 @@ const ListDeliveries = ({ order, handleDetailstrue, handleDetailsfalse }) => {
                 <BoxOrder>
                   <BlockLabel>
                     <Label>Aceito às:</Label>
-                    <Value>20:06 hs</Value>
+                    <Value>{formatTime(item.completed_at)}</Value>
                   </BlockLabel>
 
                   <BlockLabel>
                     <Label>Saiu para entrega às:</Label>
-                    <Value>20:32 hs</Value>
+                    <Value>{item.delivered_at === null 
+                    ? '---' : formatTime(item.delivered_at)}</Value>
                   </BlockLabel>
                 </BoxOrder>
 
                 <BoxOrder>
                   <BlockLabel>
                     <Label>Produção às:</Label>
-                    <Value>20:18 hs</Value>
+                    <Value>{item.production_at === null 
+                    ? '---' : formatTime(item.production_at)}</Value>
                   </BlockLabel>
 
                   <BlockLabel>
                     <Label>Entregue às:</Label>
-                    <Value>20:52 hs</Value>
+                    <Value>{item.finished_at === null 
+                    ? '---' : formatTime(item.finished_at)}</Value>
                   </BlockLabel>
                 </BoxOrder>
               </BlockOrder>

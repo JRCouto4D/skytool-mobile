@@ -127,14 +127,13 @@ export const BlockOrder = styled.View`
   margin-top: 15px;
 `;
 
-export const BoxOrder = styled.View`
-`;
+export const BoxOrder = styled.View``;
 
 export const Footer = styled.View`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  margin-top: 5px;
+  margin-top: 10px;
 `;
 export const DetailsButton = styled.TouchableOpacity`
   padding: 5px 10px 5px 0;
