@@ -35,9 +35,9 @@ export const DeliveryButton = styled(RectButton)`
   width: 100%;
 `;
 export const TextDeliveryButton = styled.Text`
-  margin-left: 10px;
+  margin-left: 5px;
   color: ${props => props.selected ? '#9F0D8B' : '#eee'};
-  font-size: 16px;
+  font-size: 14px;
   font-weight: bold;
 `;
 
@@ -46,9 +46,9 @@ export const SchedulesButton = styled(RectButton)`
   width: 100%;
 `;
 export const TextSchedulesButton = styled.Text`
-  margin-left: 10px;
+  margin-left: 5px;
   color: ${props => props.selected ? '#9F0D8B' : '#eee'};
-  font-size: 16px;
+  font-size: 14px;
   font-weight: bold;
 `;
 
